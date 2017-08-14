@@ -1,0 +1,36 @@
+{
+  "name": "doc-manager",
+  "version": "1.0.0",
+  "description": "document management system using react and redux",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olarewajuakeemope/document-manager.git"
+  },
+  "keywords": [
+    "document",
+    "management",
+    "user",
+    "system"
+  ],
+  "author": "Olarewaju Opeyemi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olarewajuakeemope/document-manager/issues"
+  },
+  "homepage": "https://github.com/olarewajuakeemope/document-manager#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
+    "express": "^4.15.4",
+    "webpack": "^3.5.4",
+    "webpack-hot-middleware": "^2.18.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.7.1"
+  }
+}
