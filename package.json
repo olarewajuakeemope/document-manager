@@ -4,7 +4,8 @@
   "description": "document management system using react and redux",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server/server.js --presets es2015,stage-0"
+    "start": "babel-node server/server.js --presets es2015,stage-0",
+    "start:client": "webpack-dev-server --progress --inline --open --watch"
   },
   "repository": {
     "type": "git",
@@ -25,10 +26,16 @@
   "dependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
+    "babel-loader": "^7.1.1",
     "babel-polyfill": "^6.23.0",
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "url-loader": "^0.5.9",
     "webpack": "^3.5.4",
     "webpack-hot-middleware": "^2.18.2"
   },
