@@ -8,7 +8,6 @@ import routes from './routes';
 render(
   <MuiThemeProvider >
     <Router history={browserHistory} routes={routes} />
-  </MuiThemeProvider >
-,
+  </MuiThemeProvider >,
   document.getElementById('root')
 );
