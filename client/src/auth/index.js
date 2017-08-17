@@ -1,4 +1,13 @@
+export const isAuthenticated = () => {
+  if (localStorage.getItem('jwtToken') !== null) {
+    return true;
+  }
+  return false;
+};
+
 export const authenticate = (nextState, replace, callback) => {
-  console.log('inside auth');
+  if (!isAuthenticated()) {
+    replace('/login');
+  }
   return callback();
 };
