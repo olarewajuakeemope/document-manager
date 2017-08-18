@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class UserTable extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside UserTable Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class UserTable
+ * @extends {React.Component}
+ */
+class UserTable extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf UserTable
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside UserTable Component</h1>
+      </div>
+    );
+  }
 }
 
 export default UserTable;

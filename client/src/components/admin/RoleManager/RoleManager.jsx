@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class RoleManager extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside RoleManager Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class RoleManager
+ * @extends {React.Component}
+ */
+class RoleManager extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf RoleManager
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside RoleManager Component</h1>
+      </div>
+    );
+  }
 }
 
 export default RoleManager;

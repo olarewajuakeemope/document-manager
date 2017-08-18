@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class Sidebar extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside Sidebar Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class Sidebar
+ * @extends {React.Component}
+ */
+class Sidebar extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf Sidebar
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside Sidebar Component</h1>
+      </div>
+    );
+  }
 }
 
 export default Sidebar;

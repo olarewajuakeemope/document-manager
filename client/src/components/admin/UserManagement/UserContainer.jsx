@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class UserContainer extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside UserContainer Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class UserContainer
+ * @extends {React.Component}
+ */
+class UserContainer extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf UserContainer
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside UserContainer Component</h1>
+      </div>
+    );
+  }
 }
 
 export default UserContainer;

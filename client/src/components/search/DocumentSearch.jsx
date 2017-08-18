@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class DocumentSearch extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside DocumentSearch Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class DocumentSearch
+ * @extends {React.Component}
+ */
+class DocumentSearch extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf DocumentSearch
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside DocumentSearch Component</h1>
+      </div>
+    );
+  }
 }
 
 export default DocumentSearch;

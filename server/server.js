@@ -13,7 +13,7 @@ const app = express();
 const router = express.Router();
 const port = process.env.PORT || 5600;
 
-if (process.env.NODE_ENV == 'test') {
+if (process.env.NODE_ENV === 'test') {
   const compiler = webpack(webpackConfig);
   app.use(webpackMiddleware(compiler, {
     hot: true,

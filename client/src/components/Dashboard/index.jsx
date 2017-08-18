@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class Dashboard extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside Dashboard Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class Dashboard
+ * @extends {React.Component}
+ */
+class Dashboard extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf Dashboard
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside Dashboard Component</h1>
+      </div>
+    );
+  }
 }
 
 export default Dashboard;

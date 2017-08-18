@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class DocumentTable extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside DocumentTable Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class DocumentTable
+ * @extends {React.Component}
+ */
+class DocumentTable extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf DocumentTable
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside DocumentTable Component</h1>
+      </div>
+    );
+  }
 }
 
 export default DocumentTable;

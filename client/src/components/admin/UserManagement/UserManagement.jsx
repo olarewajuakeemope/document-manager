@@ -1,17 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-class UserManagement extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <h1>Inside UserManagement Component</h1>
-            </div>
-        );
-    }
+/**
+ * Replace with appropriate info on completion
+ * @class UserManagement
+ * @extends {React.Component}
+ */
+class UserManagement extends Component {
+  /**
+   * @returns {Object} Jsx
+   * @memberOf UserManagement
+   */
+  render() {
+    return (
+      <div>
+        <h1>Inside UserManagement Component</h1>
+      </div>
+    );
+  }
 }
 
 export default UserManagement;

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+/**
+ * Replace with appropriate info on completion
+ * @class Signin
+ * @extends {React.Component}
+ */
 class Signin extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  /**
+   * @returns {Object} Jsx
+   * @memberOf Signin
+   */
   render() {
     return (
       <div>
