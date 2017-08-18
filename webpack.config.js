@@ -42,11 +42,11 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
         test: /(\.css)$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap')
+        loader: ExtractTextPlugin.extract([ 'css-loader', 'postcss-loader' ])
       },
       {
         test: /(\.scss)$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap')
+        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

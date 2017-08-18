@@ -1,20 +1,25 @@
-import React, { Component } from "react";
-import injectTapEventPlugin from "react-tap-event-plugin";
+import React from 'react';
+import { Row } from 'react-materialize';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-class App extends Component{
-    constructor(props){
-        super(props);
-    }
 
-    render() {
-        return (
-            <div>
-                {this.props.children}
-            </div>
-        );
-    }
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <Row>
+          <div className="content">
+            {this.props.children}
+          </div>
+        </Row>
+      </div>
+    );
+  }
 }
 
 export default App;
