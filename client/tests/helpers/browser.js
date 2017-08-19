@@ -1,5 +1,4 @@
-import { jsdom } from 'jsdom'; //eslint-disable-line
-
+import { jsdom } from 'jsdom';
 import * as chai from 'chai';
 import spies from 'chai-spies';
 import { mount, shallow, render } from 'enzyme';
