@@ -1,9 +1,8 @@
-import React from 'react';
+import React from 'react';// eslint-disable-line
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import { mount } from 'enzyme';
 import Dashboard from
-   '../../../src/components/Dashboard';
+  '../../../src/components/Dashboard';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

@@ -1,7 +1,6 @@
-import React from 'react';
+import React from 'react';// eslint-disable-line
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import { mount } from 'enzyme';
 import Navbar from '../../../src/components/Nav';
 
 chai.use(chaiEnzyme());
