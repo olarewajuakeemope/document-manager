@@ -1,5 +1,5 @@
 const userRoutes = (router) => {
-  router.route('/')
+  router.route('/api/users')
     .get(function (req, res, next) {
       res.send('Hello From UserRoutes!!!');
     })
