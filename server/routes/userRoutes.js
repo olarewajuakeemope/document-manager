@@ -1,7 +1,7 @@
 const userRoutes = (router) => {
   router.route('/api/users')
-    .get(function (req, res, next) {
+    .get((req, res) => {
       res.send('Hello From UserRoutes!!!');
-    })
+    });
 };
 export default userRoutes;
