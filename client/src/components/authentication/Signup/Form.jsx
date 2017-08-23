@@ -1,6 +1,8 @@
 import React from 'react';
 import { Input, Button } from 'react-materialize';
 import { Link } from 'react-router';
+import PropTypes from 'prop-types';
+import toastr from 'toastr';
 
 /**
  * @class Form
@@ -15,7 +17,12 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      user: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+      }
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -42,11 +49,16 @@ class Form extends React.Component {
    * @returns {none} handles form onChange event
    */
   onSubmit(e) {
-    // dummy implementation to satisfy linting
-    const field = e.target.name;
-    const user = this.state.user;
-    user[field] = e.target.value;
-    this.setState({ user });
+    e.preventDefault();
+    this.props.signup(this.state.user)
+      .then(() => {
+        toastr.success(`Welcome, ${this.state.user.firstName}!`);
+        this.context.router.push('/');
+      }).catch(() => {
+        toastr.error(
+          '* INVALID USER DETAILS!'
+        );
+      });
   }
 
   /**
@@ -106,16 +118,10 @@ class Form extends React.Component {
             onClick={this.onSubmit}
           >REGISTER
           </Button>
-          <div
-            className="input-field col s12"
-          >
-            <p
-              className="margin center medium-small sign-up"
-            >
+          <div className="input-field col s12" >
+            <p className="margin center medium-small sign-up">
                 Already have an account?
-              <Link
-                to="/login"
-              >
+              <Link to="/login">
                   Login
               </Link>
             </p>
@@ -126,4 +132,11 @@ class Form extends React.Component {
   }
 }
 
+Form.contextTypes = {
+  router: PropTypes.object
+};
+
+Form.propTypes = {
+  signup: PropTypes.func.isRequired
+};
 export default Form;

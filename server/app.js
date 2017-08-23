@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
-  }))
+  }));
 }
 
 app.listen(port);
