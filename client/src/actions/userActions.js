@@ -1,4 +1,6 @@
 import axios from 'axios';
+import toastr from 'toastr';
+import { browserHistory } from 'react-router';
 import types from './actionTypes';
 import { setAuthorizationToken } from '../auth';
 
@@ -39,5 +41,41 @@ export function signup(user) {
       axios.defaults.headers.common.Authorization = token;
       dispatch(setCurrentUser(res.data));
     });
+}
+
+/**
+ * Async Function to handle user login
+ * @export
+ * @param {Object} user
+ * @returns {Object} dispatch
+ */
+export function login(user) {
+  return dispatch => axios.post('/api/users/login', user)
+    .then((response) => {
+      if (response.status === 200) {
+        const token = response.data.token;
+        localStorage.setItem('jwtToken', token);
+        axios.defaults.headers.common.Authorization = token;
+        dispatch(setCurrentUser(response.data));
+        return browserHistory.push('/');
+      } else if (response.status === 401) {
+        return toastr.error('User does not exist!');
+      }
+      return toastr.error('Invalid Login details!');
+    }).catch(() => toastr.error('Invalid Login details!'));
+}
+
+/**
+ * Function to handle logout
+ * @export
+ * @param {Object} user
+ * @returns {Object} dispatch
+ */
+export function logout() {
+  return (dispatch) => {
+    localStorage.removeItem('jwtToken');
+    setAuthorizationToken(false);
+    dispatch(setCurrentUser({}));
+  };
 }
 
