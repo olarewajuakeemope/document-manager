@@ -52,17 +52,19 @@ export function signup(user) {
 export function login(user) {
   return dispatch => axios.post('/api/users/login', user)
     .then((response) => {
-      if (response.status === 200) {
-        const token = response.data.token;
-        localStorage.setItem('jwtToken', token);
-        axios.defaults.headers.common.Authorization = token;
-        dispatch(setCurrentUser(response.data));
-        return browserHistory.push('/');
-      } else if (response.status === 401) {
+      const token = response.data.token;
+      localStorage.setItem('jwtToken', token);
+      axios.defaults.headers.common.Authorization = token;
+      dispatch(setCurrentUser(response.data));
+      return browserHistory.push('/');
+    }).catch((error) => {
+      if (error.request.status === 401) {
+        return toastr.error('Invalid Password!');
+      } else if (error.request.status === 404) {
         return toastr.error('User does not exist!');
       }
       return toastr.error('Invalid Login details!');
-    }).catch(() => toastr.error('Invalid Login details!'));
+    });
 }
 
 /**
