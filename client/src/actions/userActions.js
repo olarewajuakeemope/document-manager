@@ -58,9 +58,10 @@ export function login(user) {
       dispatch(setCurrentUser(response.data));
       return browserHistory.push('/');
     }).catch((error) => {
-      if (error.request.status === 401) {
+      const errorStatus = error.request.status;
+      if (errorStatus === 401) {
         return toastr.error('Invalid Password!');
-      } else if (error.request.status === 404) {
+      } else if (errorStatus === 404) {
         return toastr.error('User does not exist!');
       }
       return toastr.error('Invalid Login details!');
