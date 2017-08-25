@@ -78,7 +78,10 @@ class UserController {
       model.User.findOne({ where: { email: newUser.email } })
         .then((user) => {
           if (user) {
-            const verifyPassword = Auth.verifyPassword(newUser.password, user.password);
+            const verifyPassword = Auth.verifyPassword(
+              newUser.password,
+              user.password
+            );
             if (verifyPassword) {
               const token = Auth.generateToken(user);
               user.update({ currentToken: token })
