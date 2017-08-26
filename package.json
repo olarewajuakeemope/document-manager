@@ -4,6 +4,10 @@
   "description": "document management system using react and redux",
   "main": "server.js",
   "scripts": {
+    "undo:migrations": "sequelize db:migrate:undo:all",
+    "migrations": "sequelize db:migrate",
+    "seeds": "sequelize db:seed:all",
+    "undo:seeds": "sequelize db:seed:undo:all",
     "start": "babel-node server/app.js --presets es2015,stage-0",
     "start:server": "nodemon server/app.js --exec babel-node",
     "start:client": "webpack-dev-server --progress --inline --open --watch",
