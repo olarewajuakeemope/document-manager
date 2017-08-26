@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import Nav from '../Nav'; //eslint-disable-line
+import Footer from '../footer';
+import Sidebar from '../Sidebar';
+import DocumentPanel from '../Documents/DocumentPanel';
+
 
 /**
- * Replace with appropriate info on completion
  * @class Dashboard
- * @extends {React.Component}
+ * @extends {Component}
  */
 class Dashboard extends Component {
   /**
@@ -13,7 +17,17 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <h1>Inside Dashboard Component</h1>
+        <Sidebar />
+        <Nav />
+        <div
+          className="col s9 push-s3"
+          id="none"
+        >
+          <div className="row">
+            <DocumentPanel />
+          </div>
+          <Footer />
+        </div>
       </div>
     );
   }

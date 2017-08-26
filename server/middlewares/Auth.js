@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt-nodejs';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -47,5 +48,16 @@ export default class Auth {
    */
   static verifyAdmin(roleId) {
     return Number(roleId) === 1;
+  }
+  /**
+    * Function to verify admin user
+   * @static
+   * @param {String} loginUserPassword
+   * @param {String} dbUserPassword
+   * @returns {Boolean} value
+   * @memberOf Auth
+   */
+  static verifyPassword(loginUserPassword, dbUserPassword) {
+    return bcrypt.compareSync(loginUserPassword, dbUserPassword);
   }
 }

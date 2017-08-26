@@ -57,5 +57,48 @@ const userRoutes = (router) => {
      *          type: object
      */
     .post(UserMiddleware.validateOnCreate, UserController.createUser);
+
+  /**
+ * @swagger
+ * definition:
+ *   Login:
+ *     type: object
+ *     required:
+ *       - email
+ *       - password
+ *     properties:
+ *       password:
+ *         type: string
+ *         format: password
+ *       email:
+ *         type: string
+ *         format: email
+ */
+  router.route('/api/users/login')
+    /**
+     * @swagger
+     * /api/users/login:
+     *   post:
+     *     description: Signs in a user
+     *     tags:
+     *      - Signs in a user
+     *     produces:
+     *      - application/json
+     *     parameters:
+     *       - name: body
+     *         description: User object
+     *         in:  body
+     *         required: true
+     *         type: string
+     *         schema:
+     *           $ref: '#/definitions/Login'
+     *     responses:
+     *       201:
+     *         description: users
+     *         schema:
+     *          type: object
+     */
+
+    .post(UserController.logIn);
 };
 export default userRoutes;

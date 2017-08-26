@@ -2,6 +2,7 @@ import React from 'react';
 import { Row } from 'react-materialize';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 injectTapEventPlugin();
 
@@ -29,7 +30,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  isLoggedIn: state.auth.isLoggedIn
+});
+
+export default connect(mapStateToProps)(App);

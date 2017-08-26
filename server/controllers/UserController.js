@@ -64,6 +64,58 @@ class UserController {
           });
       });
   }
+
+  /** Function to handle login action for users
+   * @static
+   * @param {Object} request
+   * @param {Object} response
+   * @returns {Object} response
+   * @memberOf UserController
+   */
+  static logIn(request, response) {
+    if (request.body.email && request.body.password) {
+      const newUser = request.body;
+      model.User.findOne({ where: { email: newUser.email } })
+        .then((user) => {
+          if (user) {
+            const verifyPassword = Auth.verifyPassword(
+              newUser.password,
+              user.password
+            );
+            if (verifyPassword) {
+              const token = Auth.generateToken(user);
+              user.update({ currentToken: token })
+                .then(() => {
+                  response.status(200).json({
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    roleId: user.roleId,
+                    id: user.id,
+                    createdAt: user.createdAt,
+                    token
+                  });
+                });
+            } else {
+              ResponseHandler.send401(
+                response,
+                { message: 'Bad Login Details!' }
+              );
+            }
+          } else {
+            ResponseHandler.send404(response);
+          }
+        })
+        .catch((error) => {
+          response.send(error);
+        });
+    } else {
+      ResponseHandler.send400(
+        response,
+        { message: 'Invalid Operation! Please Enter valid login details' }
+      );
+    }
+  }
 }
 
 export default UserController;
