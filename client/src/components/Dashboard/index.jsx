@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Nav from '../Nav'; //eslint-disable-line
+import Nav from '../Nav';
 import Footer from '../footer';
 import Sidebar from '../Sidebar';
 import DocumentPanel from '../Documents/DocumentPanel';

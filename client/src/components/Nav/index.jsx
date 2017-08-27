@@ -11,7 +11,7 @@ import { logout } from '../../actions/userActions';
  * @class Nav
  * @extends {Component}
  */
-export class Nav extends Component {
+class Nav extends Component {
   /**
    * Creates an instance of Nav.
    * @param {Object} props
