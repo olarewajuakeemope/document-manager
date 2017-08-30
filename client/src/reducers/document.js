@@ -14,6 +14,9 @@ let newState;
 export default function documentReducer(
   state = initialState.manageDocuments, action) {
   switch (action.type) {
+  case types.LOAD_DOCUMENT:
+    return Object.assign({}, ...state, { documents: action.documents });
+
   case types.CREATE_DOCUMENT:
     newState = { ...state };
     newState.documents.push(action.document);

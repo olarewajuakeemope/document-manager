@@ -49,7 +49,32 @@ const documentRoutes = (router) => {
      *          type: object
      */
     .post(Auth.authenticateUser, DocumentMiddleware.validateOnPost,
-      DocumentController.createDocument);
+      DocumentController.createDocument)
+    /**
+     * @swagger
+     * /api/documents:
+     *   get:
+     *     description: Gets a list of all documents
+     *     tags:
+     *      - Get Document List
+     *     produces:
+     *      - application/json
+     *     parameters:
+     *        - name: Authorization
+     *          in: header
+     *          description: an authorization header
+     *          required: true
+     *          type: string
+     *     responses:
+     *        200:
+     *          description: documents
+     *          schema:
+     *            type: array
+     *            items:
+     *              $ref: '#/definitions/Document'
+     */
+    .get(Auth.authenticateUser, DocumentMiddleware.validateOnGet,
+      DocumentController.searchDocuments);
 };
 
 export default documentRoutes;
