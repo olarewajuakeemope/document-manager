@@ -84,7 +84,7 @@ export class DocumentCard extends Component {
           <div className="card ace-card">
             <div className="card-content">
               <span className="card-title doc-title">{this.props.title}</span>
-              <p>{this.props.content.slice(0, 15)}...</p>
+              <p>{this.props.content.replace(/<p*[^>]*>/g, '').slice(0, 15)}...</p>
             </div>
             <div className="card-action row">
               <div className="col s4">
