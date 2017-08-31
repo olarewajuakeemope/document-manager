@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DocumentCard from './DocumentCard';
+import DocumentCard from './DocumentCard'; // eslint-disable-line
 
 /**
  * @class DocumentList
@@ -25,7 +25,6 @@ class DocumentList extends Component {
                 key={doc.title + index} // eslint-disable-line
                 id={doc.id}
                 content={doc.content}
-                auth={this.props.auth}
                 ownerId={doc.ownerId}
                 access={doc.access}
                 date={doc.createdAt}
@@ -39,8 +38,7 @@ class DocumentList extends Component {
 }
 
 DocumentList.propTypes = {
-  Docs: PropTypes.array.isRequired,
-  auth: PropTypes.object.isRequired
+  Docs: PropTypes.array.isRequired
 };
 
 

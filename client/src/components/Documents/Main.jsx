@@ -21,7 +21,6 @@ class Main extends Component {
           <p />
           <DocumentList
             Docs={docs}
-            auth={this.props.auth}
           />
         </div>
       </div>
@@ -30,7 +29,6 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-  auth: PropTypes.object.isRequired,
   documents: PropTypes.array.isRequired
 };
 

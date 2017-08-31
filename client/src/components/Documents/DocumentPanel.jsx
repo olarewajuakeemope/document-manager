@@ -27,17 +27,14 @@ class DocumentPanel extends Component {
             {isPublic ?
               <Main
                 documents={this.props.publicDocuments}
-                auth={this.props.auth}
               /> : ''
             }{isPrivate ?
               <Main
                 documents={this.props.privateDocuments}
-                auth={this.props.auth}
               /> : ''
             }{isRole ?
               <Main
                 documents={this.props.roleDocuments}
-                auth={this.props.auth}
               /> : ''
             }
           </div>
@@ -52,36 +49,42 @@ DocumentPanel.propTypes = {
   publicDocuments: PropTypes.array.isRequired,
   privateDocuments: PropTypes.array.isRequired,
   roleDocuments: PropTypes.array.isRequired,
-  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const currentState = state.manageDocuments;
   let roleDocuments = [];
   let privateDocuments = [];
-  const publicDocuments = currentState.documents.filter(
+
+  const stateDocuments = state.manageDocuments.documents;
+  const authDetails = state.auth;
+  const user = authDetails.user;
+  const isLoggedIn = authDetails.isLoggedIn;
+
+  const publicDocuments = stateDocuments.filter(
     doc => doc.access === 'public');
-  if (state.auth.isLoggedIn && state.auth.user.roleId !== 1) {
-    roleDocuments = currentState.documents.filter(
-        doc => doc.access === 'role'
-                && doc.ownerRoleId === state.auth.user.roleId
-      );
-    privateDocuments = currentState.documents.filter(
-          doc => doc.ownerId === state.auth.user.id);
-  } else if (state.auth.isLoggedIn && state.auth.user.roleId === 1) {
-    roleDocuments = currentState.documents.filter(
-        doc => doc.access === 'role');
-    privateDocuments = currentState.documents.filter(
-          doc => doc.access === 'private');
+
+  if (isLoggedIn && user.roleId !== 1) {
+    roleDocuments = stateDocuments.filter(
+      doc => doc.access === 'role'
+            && doc.ownerRoleId === user.roleId
+    );
+
+    privateDocuments = stateDocuments.filter(
+      doc => doc.ownerId === user.id);
+  } else if (isLoggedIn && user.roleId === 1) {
+    roleDocuments = stateDocuments.filter(
+      doc => doc.access === 'role');
+
+    privateDocuments = stateDocuments.filter(
+      doc => doc.access === 'private');
   }
+
   return {
     publicDocuments,
-    user: state.auth.user,
-    isLoggedIn: state.auth.isLoggedIn,
+    user,
+    isLoggedIn,
     roleDocuments,
-    privateDocuments,
-    auth: state.auth,
-    documentDetails: currentState.documentDetails
+    privateDocuments
   };
 };
 export default connect(mapStateToProps, null)(DocumentPanel);

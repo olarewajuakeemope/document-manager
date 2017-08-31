@@ -142,8 +142,15 @@ DocumentCard.propTypes = {
 DocumentCard.contextTypes = {
   router: PropTypes.object
 };
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(documentActions, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(DocumentCard);
+export default connect(mapStateToProps, mapDispatchToProps)(DocumentCard);
