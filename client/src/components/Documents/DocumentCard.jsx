@@ -79,51 +79,52 @@ export class DocumentCard extends Component {
    */
   render() {
     return (
-      <div className="row">
-        <div className="card ace-card">
-          <div className="card-content">
-            <span className="card-title doc-title">{this.props.title}</span>
-            <p>{this.props.content.slice(0, 15)}...</p>
-          </div>
-          <div className="card-action row">
-            <div className="col s4">
-              <span   // eslint-disable-line
-                id="edit-doc"
-                className="fa fa-pencil-square-o card-actions tooltipped ace-icon" // eslint-disable-line
-                data-position="bottom"
-                data-tooltip="Edit document"
-                onClick={this.editDocument}
-              />
+      <div className="col s3">
+        <div className="row">
+          <div className="card ace-card">
+            <div className="card-content">
+              <span className="card-title doc-title">{this.props.title}</span>
+              <p>{this.props.content.slice(0, 15)}...</p>
             </div>
-            <div className="col s4">
-              <span   // eslint-disable-line
-                className=""
-                data-position="bottom"
-                data-tooltip="View document"
-                onClick={this.editDocument}
-              />
-            </div>
-            <div className="col s4">
-              <span   // eslint-disable-line
-                className="fa fa-trash card-actions tooltipped ace-icon"
-                data-position="bottom"
-                id="delete-doc"
-                data-delay="20"
-                data-tooltip="Delete document"
-                onClick={
-                  () => {
-                    this.deleteDocument(
-                      this.props.id,
-                      this.props.actions.deleteDocumentById
-                    );
+            <div className="card-action row">
+              <div className="col s4">
+                <span   // eslint-disable-line
+                  id="edit-doc"
+                  className="fa fa-pencil-square-o card-actions tooltipped ace-icon" // eslint-disable-line
+                  data-position="bottom"
+                  data-tooltip="Edit document"
+                  onClick={this.editDocument}
+                />
+              </div>
+              <div className="col s4">
+                <span   // eslint-disable-line
+                  className=""
+                  data-position="bottom"
+                  data-tooltip="View document"
+                  onClick={this.editDocument}
+                />
+              </div>
+              <div className="col s4">
+                <span   // eslint-disable-line
+                  className="fa fa-trash card-actions tooltipped ace-icon"
+                  data-position="bottom"
+                  id="delete-doc"
+                  data-delay="20"
+                  data-tooltip="Delete document"
+                  onClick={
+                    () => {
+                      this.deleteDocument(
+                        this.props.id,
+                        this.props.actions.deleteDocumentById
+                      );
+                    }
                   }
-                }
-              />
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     );
   }
 }
@@ -143,11 +144,9 @@ DocumentCard.contextTypes = {
   router: PropTypes.object
 };
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth
-  };
-};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(documentActions, dispatch)

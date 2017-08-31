@@ -19,17 +19,17 @@ class DocumentList extends Component {
           .props
           .Docs
           .map((doc, index) => (
-            <div className="col s3">
-              <DocumentCard
-                title={doc.title}
+
+            <DocumentCard
+              title={doc.title}
                 key={doc.title + index} // eslint-disable-line
-                id={doc.id}
-                content={doc.content}
-                ownerId={doc.ownerId}
-                access={doc.access}
-                date={doc.createdAt}
-              />
-            </div>
+              id={doc.id}
+              content={doc.content}
+              ownerId={doc.ownerId}
+              access={doc.access}
+              date={doc.createdAt}
+            />
+
           ))
         }
       </div>
