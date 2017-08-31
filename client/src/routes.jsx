@@ -24,9 +24,8 @@ export default (
     <Route path="/users" component={UserManagement} />
     <Route path="/roles" component={RoleManager} />
     <Route path="/profile" component={Profile} />
-    <Route path="/privateDocs" component={DashBoard} />
+    <Route path="/document/:doctype" component={DashBoard} />
     <Route path="/profile" component={DashBoard} />
-    <Route path="/roleDocs" component={DashBoard} />
     <Route path="*" component={ErrorPage} />
   </Route>
 );

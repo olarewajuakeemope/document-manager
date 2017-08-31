@@ -35,7 +35,7 @@ class Dashboard extends Component {
           id="none"
         >
           <div className="row">
-            <DocumentPanel />
+            <DocumentPanel params={this.props.params} />
           </div>
           <Footer />
         </div>
@@ -46,6 +46,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   loadAllDocument: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired
 };
 
 export default connect(null, { loadAllDocument })(Dashboard);

@@ -1,17 +1,37 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import DocumentList from './DocumentList';
 
+/**
+ * Holds the DocumentList components
+ * @class Main
+ * @extends {Component}
+ */
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  /**
+   * @returns {Object} Jsx
+   * @memberOf DocumentPanel
+   */
   render() {
+    const docs = this.props.documents.slice(0, 12);
     return (
-      <div>
-        <h1>Inside Main Component</h1>
+      <div className="row">
+        <div className="col s12">
+          <p />
+          <p />
+          <DocumentList
+            Docs={docs}
+            auth={this.props.auth}
+          />
+        </div>
       </div>
     );
   }
 }
+
+Main.propTypes = {
+  auth: PropTypes.object.isRequired,
+  documents: PropTypes.array.isRequired
+};
 
 export default Main;

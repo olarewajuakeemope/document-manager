@@ -89,13 +89,13 @@ class MenuList extends Component {
               <Link to="/roles">Manage Roles </Link>
             </ListItem>
             <ListItem leftIcon={<ContentSend />}>
-              <Link to="/privateDocs">My Docs</Link>
+              <Link to="/document/privateDocs">My Docs</Link>
             </ListItem>
             <ListItem leftIcon={<ContentSend />}>
-              <Link to="/">Public Docs</Link>
+              <Link to="/document/publicDocs">Public Docs</Link>
             </ListItem>
             <ListItem leftIcon={<ContentSend />}>
-              <Link to="/roleDocs">Role Docs</Link>
+              <Link to="/document/roleDocs">Role Docs</Link>
             </ListItem>
           </List>
           :
@@ -111,19 +111,19 @@ class MenuList extends Component {
                   key={1}
                   leftIcon={<ActionGrade />}
                 >
-                  <Link to="/privateDocs">My Docs</Link>
+                  <Link to="/document/privateDocs">My Docs</Link>
                 </ListItem>,
                 <ListItem
                   key={2}
                   leftIcon={<ContentSend />}
                 >
-                  <Link to="/">Public Docs</Link>
+                  <Link to="/document/publicDocs">Public Docs</Link>
                 </ListItem>,
                 <ListItem
                   key={3}
                   leftIcon={<ContentSend />}
                 >
-                  <Link to="/roleDocs">Role Docs</Link>
+                  <Link to="/document/roleDocs">Role Docs</Link>
                 </ListItem>
               ]}
             /></List>
