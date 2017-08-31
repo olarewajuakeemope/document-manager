@@ -75,6 +75,32 @@ const documentRoutes = (router) => {
      */
     .get(Auth.authenticateUser, DocumentMiddleware.validateOnGet,
       DocumentController.searchDocuments);
+
+  router.route('/api/documents/:id')
+    /**
+     * @swagger
+     * /api/documents/{id}:
+     *   delete:
+     *     description: Removes a document by Id
+     *     tags:
+     *      - Removes a document by Id
+     *     produces:
+     *      - application/json
+     *     parameters:
+     *        - name: Authorization
+     *          in: header
+     *          description: an authorization header
+     *          required: true
+     *          type: string
+     *     responses:
+     *        200:
+     *          description: documents
+     *          schema:
+     *            type: array
+     *            items:
+     *              $ref: '#/definitions/Document'
+     */
+    .delete(Auth.authenticateUser, DocumentController.removeDocument);
 };
 
 export default documentRoutes;

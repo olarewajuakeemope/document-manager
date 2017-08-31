@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toastr from 'toastr';
 import types from './actionTypes';
 /**
  * Function to dispatch action type of CREATE_DOCUMENT
@@ -40,5 +41,29 @@ export function loadDocuments(documents) {
 export function loadAllDocument() {
   return dispatch => axios.get('/api/documents').then((res) => {
     dispatch(loadDocuments(res.data.documents));
+  });
+}
+/**
+ * Function to dispatch action type of DELETE_DOCUMENT
+ * @export
+ * @param {Number} id
+ * @returns {Object} action
+ */
+export function deleteDocument(id) {
+  return {
+    type: types.DELETE_DOCUMENT,
+    id
+  };
+}
+/**
+ * Async Function to handle deletion of user documents by id
+ * @export
+ * @param {Object} id
+ * @returns {Object} dispatch
+ */
+export function deleteDocumentById(id) {
+  return dispatch => axios.delete(`/api/documents/${id}`).then(() => {
+    dispatch(deleteDocument(id));
+    return toastr.success('Document deleted successfully!');
   });
 }

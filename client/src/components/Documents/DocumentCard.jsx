@@ -18,7 +18,7 @@ export class DocumentCard extends Component {
    */
   constructor(props) {
     super(props);
-    // this.deleteDocument = this.deleteDocument.bind(this);
+    this.deleteDocument = this.deleteDocument.bind(this);
     this.editDocument = this.editDocument.bind(this);
   }
   /**

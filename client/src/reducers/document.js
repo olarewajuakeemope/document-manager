@@ -22,6 +22,12 @@ export default function documentReducer(
     newState.documents.push(action.document);
     return newState;
 
+  case types.DELETE_DOCUMENT:
+    newState = { ...state };
+    newState.documents = [...state.documents].filter(
+      document => document.id !== action.id);
+    return newState;
+
   default:
     return state;
   }

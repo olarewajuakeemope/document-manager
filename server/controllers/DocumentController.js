@@ -144,5 +144,40 @@ class DocumentController {
         ErrorHandler.handleRequestError(response, error);
       });
   }
+  /** Function to delete documents
+   * @static
+   * @param {Object} request
+   * @param {Object} response
+  * @returns {Object} response
+   * @memberOf DocumentController
+   */
+  static removeDocument(request, response) {
+    const userId = request.decoded.id;
+    const userRole = request.decoded.roleId;
+    const documentId = Number(request.params.id);
+    docDb.findById(documentId)
+      .then((foundDocument) => {
+        if (foundDocument) {
+          if (foundDocument.ownerId === userId ||
+        Auth.verifyAdmin(userRole)) {
+            foundDocument.destroy()
+              .then(() => {
+                ResponseHandler.sendResponse(
+                  response,
+                  200,
+                  { message: 'Document Removed Successfully' }
+                );
+              });
+          } else {
+            ResponseHandler.send403(
+              response,
+              { message: 'Invalid Operation! No Access to delete!!' }
+            );
+          }
+        } else {
+          ResponseHandler.send404(response);
+        }
+      });
+  }
 }
 export default DocumentController;
