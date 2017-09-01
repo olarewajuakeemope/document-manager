@@ -37,6 +37,13 @@ export default function documentReducer(
       { editMode: true },
       { document: action.document });
 
+  case types.EDIT_DOCUMENT_COMPLETED:
+    return Object.assign(
+      {},
+      state,
+      { editMode: false },
+      { document: {} });
+
   default:
     return state;
   }

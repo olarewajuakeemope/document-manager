@@ -80,15 +80,15 @@ export function editDocument(document) {
   };
 }
 /**
- * Async Function to handle loading user documents
+ * Function to dispatch action type of EDIT_DOCUMENT
  * @export
- * @returns {Object} dispatch
+ * @param {Object} document
+ * @returns {Object} action
  */
-export function loadUserDocument() {
-  return (dispatch, getState) => axios.get(
-    `/api/users/${getState().auth.user.id}/documents`).then((res) => {
-    dispatch(loadDocuments(res.data.documents));
-  });
+export function editDocumentCompleted() {
+  return {
+    type: types.EDIT_DOCUMENT_COMPLETED
+  };
 }
 /**
  * Async Function to handle updates on documents
@@ -99,6 +99,6 @@ export function loadUserDocument() {
 export function updateDocument(document) {
   return dispatch => axios.put(`/api/documents/${document.id}`, document)
     .then(() => {
-      dispatch(loadUserDocument());
+      dispatch(loadAllDocument());
     });
 }

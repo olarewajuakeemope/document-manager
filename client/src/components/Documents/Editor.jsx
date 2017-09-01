@@ -48,6 +48,7 @@ class Editor extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.concludeSaveUpdate = this.concludeSaveUpdate.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -59,7 +60,7 @@ class Editor extends Component {
    */
   handleClose(e) { // eslint-disable-line
     e.preventDefault();
-    browserHistory.push('/');
+    this.concludeSaveUpdate();
   }
 
   /**
@@ -97,7 +98,15 @@ class Editor extends Component {
   handleSelect(event) {
     this.setState({ access: event.target.value });
   }
-
+  /**
+   * Funtion to handle Updating created documents
+   * @returns {None} none
+   * @memberof Editor
+   */
+  concludeSaveUpdate() {
+    this.props.actions.editDocumentCompleted();
+    browserHistory.push('/');
+  }
   /**
    * Funtion to handle submission of created documents
    * @param {Object} e - browser click event
@@ -119,10 +128,12 @@ class Editor extends Component {
       access,
     };
     this.props.actions.saveDocument(data)
-      .then(() => toastr.success('Document saved succesfully'))
+      .then(() => {
+        toastr.success('Document saved succesfully');
+      })
       .catch(() => toastr.error('Something Went Wrong', 'Please login Again'));
+    this.concludeSaveUpdate();
   }
-
   /**
    * Funtion to handle Updating created documents
    * @param {Object} e - browser click event
@@ -146,11 +157,15 @@ class Editor extends Component {
       this.props.actions.updateDocument(data)
         .then(() => {
           toastr.success('Document updated succesfully');
-        }).catch(() => toastr.error('Document could not be updated!'));
+        }).catch(() => {
+          toastr.error('Document could not be updated!');
+        });
+      this.concludeSaveUpdate();
     } else {
       toastr.error(
         `You currently do not have edit access ${document.title}`
       );
+      this.concludeSaveUpdate();
     }
   }
   /**

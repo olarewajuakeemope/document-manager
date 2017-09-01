@@ -1,4 +1,3 @@
-import Auth from '../middlewares/Auth';
 import UserMiddleware from '../middlewares/Users';
 import UserController from '../controllers/UserController';
 
@@ -101,29 +100,5 @@ const userRoutes = (router) => {
      */
 
     .post(UserController.logIn);
-  router.route('/api/users/:id/documents')
-  /**
-   * @swagger
-   * /api/users/{id}/documents:
-   *    get:
-   *      description: Returns the documents belonging to the user of id
-   *      tags:
-   *        - Returns Documents of A User
-   *      produces:
-   *        - application/json
-   *      parameters:
-   *        - name: Authorization
-   *          in: header
-   *          description: an authorization header
-   *          required: true
-   *          type: string
-   *      responses:
-   *        200:
-   *          description: user's documents
-   *          schema:
-   *            type: object
-   */
-    .get(Auth.authenticateUser,
-      UserController.retrieveUserDocuments);
 };
 export default userRoutes;
