@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
+import DocumentTable from './DocumentTable';
 
 /**
- * Replace with appropriate info on completion
- * @class MainContainer
- * @extends {React.Component}
+ * @class Container
+ * @extends {Component}
  */
 class MainContainer extends Component {
   /**
    * @returns {Object} Jsx
-   * @memberOf MainContainer
+   * @memberOf Container
    */
   render() {
+    const tableHeaders = [
+      { alias: 'ID', sortable: true, dataAlias: 'id' },
+      { alias: 'Title', sortable: true, dataAlias: 'title' },
+      { alias: 'Access', sortable: true, dataAlias: 'access' },
+      { alias: 'Role', sortable: false, dataAlias: 'ownerRoleId' },
+      { alias: '', sortable: false, dataAlias: 'ownerId' },
+      { alias: '', sortable: false, dataAlias: 'ownerId' }
+    ];
     return (
-      <div>
-        <h1>Inside MainContainer Component</h1>
-      </div>
+      <DocumentTable
+        tableHeaders={tableHeaders}
+        limit={8}
+      />
     );
   }
 }

@@ -48,7 +48,7 @@ class Editor extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
-    this.concludeSaveUpdate = this.concludeSaveUpdate.bind(this);
+    this.handlePageRedirect = this.handlePageRedirect.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -60,7 +60,7 @@ class Editor extends Component {
    */
   handleClose(e) { // eslint-disable-line
     e.preventDefault();
-    this.concludeSaveUpdate();
+    this.handlePageRedirect();
   }
 
   /**
@@ -103,7 +103,7 @@ class Editor extends Component {
    * @returns {None} none
    * @memberof Editor
    */
-  concludeSaveUpdate() {
+  handlePageRedirect() {
     this.props.actions.editDocumentCompleted();
     browserHistory.push('/');
   }
@@ -132,7 +132,7 @@ class Editor extends Component {
         toastr.success('Document saved succesfully');
       })
       .catch(() => toastr.error('Something Went Wrong', 'Please login Again'));
-    this.concludeSaveUpdate();
+    this.handlePageRedirect();
   }
   /**
    * Funtion to handle Updating created documents
@@ -160,12 +160,12 @@ class Editor extends Component {
         }).catch(() => {
           toastr.error('Document could not be updated!');
         });
-      this.concludeSaveUpdate();
+      this.handlePageRedirect();
     } else {
       toastr.error(
         `You currently do not have edit access ${document.title}`
       );
-      this.concludeSaveUpdate();
+      this.handlePageRedirect();
     }
   }
   /**
