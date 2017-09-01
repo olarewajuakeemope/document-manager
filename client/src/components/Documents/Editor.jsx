@@ -174,6 +174,7 @@ class Editor extends Component {
    * @memberof Editor
    */
   render() {
+    const { editMode } = this.props;
     return (
       <div>
         <Nav />
@@ -211,6 +212,11 @@ class Editor extends Component {
                   Role
             </option>
           </Input>
+          {editMode ?
+            <div className="col s4">
+              <p>Created At : {this.props.document.date.substr(0, 10)}</p>
+            </div> : ''
+          }
         </Row>
         <TinyMCE
           id="tiny"
