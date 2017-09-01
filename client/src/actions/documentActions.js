@@ -67,3 +67,38 @@ export function deleteDocumentById(id) {
     return toastr.success('Document deleted successfully!');
   });
 }
+/**
+ * Function to dispatch action type of EDIT_DOCUMENT
+ * @export
+ * @param {Object} document
+ * @returns {Object} action
+ */
+export function editDocument(document) {
+  return {
+    type: types.EDIT_DOCUMENT,
+    document
+  };
+}
+/**
+ * Async Function to handle loading user documents
+ * @export
+ * @returns {Object} dispatch
+ */
+export function loadUserDocument() {
+  return (dispatch, getState) => axios.get(
+    `/api/users/${getState().auth.user.id}/documents`).then((res) => {
+    dispatch(loadDocuments(res.data.documents));
+  });
+}
+/**
+ * Async Function to handle updates on documents
+ * @export
+ * @param {Object} document
+ * @returns {Object} dispatch
+ */
+export function updateDocument(document) {
+  return dispatch => axios.put(`/api/documents/${document.id}`, document)
+    .then(() => {
+      dispatch(loadUserDocument());
+    });
+}

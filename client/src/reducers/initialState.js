@@ -9,6 +9,7 @@ export default {
   user: {},
   manageDocuments: {
     documents: [],
+    document: {},
     documentDetails: false,
     editMode: false
   },

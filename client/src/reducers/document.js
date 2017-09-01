@@ -15,7 +15,12 @@ export default function documentReducer(
   state = initialState.manageDocuments, action) {
   switch (action.type) {
   case types.LOAD_DOCUMENT:
-    return Object.assign({}, ...state, { documents: action.documents });
+    return Object.assign(
+      {},
+      ...state,
+      { editMode: false },
+      { document: {} },
+      { documents: action.documents });
 
   case types.CREATE_DOCUMENT:
     newState = { ...state };
@@ -27,6 +32,13 @@ export default function documentReducer(
     newState.documents = [...state.documents].filter(
       document => document.id !== action.id);
     return newState;
+
+  case types.EDIT_DOCUMENT:
+    return Object.assign(
+      {},
+      ...state,
+      { editMode: true },
+      { document: action.document });
 
   default:
     return state;
