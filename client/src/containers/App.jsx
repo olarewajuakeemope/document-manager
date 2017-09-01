@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Row } from 'react-materialize';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import PropTypes from 'prop-types';
@@ -9,9 +9,9 @@ injectTapEventPlugin();
 /**
  * Replace with appropriate info on completion
  * @class App
- * @extends {React.Component}
+ * @extends {Component}
  */
-class App extends React.Component {
+class App extends Component {
   /**
    * @returns {Object} Jsx
    * @memberOf App
@@ -37,5 +37,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
   isLoggedIn: state.auth.isLoggedIn
 });
+
+window.reactprops = App.props;
 
 export default connect(mapStateToProps)(App);

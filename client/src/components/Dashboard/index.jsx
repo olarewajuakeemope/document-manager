@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Nav from '../Nav'; //eslint-disable-line
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Nav from '../Nav';
 import Footer from '../footer';
 import Sidebar from '../Sidebar';
 import DocumentPanel from '../Documents/DocumentPanel';
+import { loadAllDocument } from '../../actions/documentActions';
 
 
 /**
@@ -10,6 +13,14 @@ import DocumentPanel from '../Documents/DocumentPanel';
  * @extends {Component}
  */
 class Dashboard extends Component {
+  /**
+   * Hook Method
+   * @returns {none} updates state before component mounts
+   * @memberOf Dashboard
+   */
+  componentWillMount() {
+    this.props.loadAllDocument();
+  }
   /**
    * @returns {Object} Jsx
    * @memberOf Dashboard
@@ -24,7 +35,7 @@ class Dashboard extends Component {
           id="none"
         >
           <div className="row">
-            <DocumentPanel />
+            <DocumentPanel params={this.props.params} />
           </div>
           <Footer />
         </div>
@@ -33,4 +44,9 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+  loadAllDocument: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired
+};
+
+export default connect(null, { loadAllDocument })(Dashboard);

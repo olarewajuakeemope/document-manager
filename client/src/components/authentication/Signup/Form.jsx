@@ -56,7 +56,7 @@ class Form extends React.Component {
         this.context.router.push('/');
       }).catch(() => {
         toastr.error(
-          '* INVALID USER DETAILS!'
+          '* Email Address Already Exists!'
         );
       });
   }

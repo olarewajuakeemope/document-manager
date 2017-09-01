@@ -21,7 +21,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <Nav auth={this.props.auth} />
+        <Nav />
         <div
           className="col s12"
           id="none"
@@ -43,8 +43,7 @@ class Signup extends React.Component {
 }
 
 Signup.propTypes = {
-  actions: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -52,7 +51,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   user: state.user
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

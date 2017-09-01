@@ -49,7 +49,7 @@ export class Signin extends Component {
   render() {
     return (
       <div>
-        <Nav auth={this.props.auth} />
+        <Nav />
         <div
           className="col s12"
           id="none"
@@ -103,10 +103,7 @@ Signin.contextTypes = {
   router: PropTypes.object
 };
 Signin.propTypes = {
-  login: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired
 };
-const mapStateToProps = state => ({
-  auth: state.auth,
-});
-export default connect(mapStateToProps, { login })(Signin);
+
+export default connect(null, { login })(Signin);
