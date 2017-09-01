@@ -179,5 +179,40 @@ class DocumentController {
         }
       });
   }
+
+  /** Function to edit documents
+   * @static
+   * @param {Object} request
+   * @param {Object} response
+  * @returns {Object} response
+   * @memberOf DocumentController
+   */
+  static updateDocument(request, response) {
+    const userId = request.decoded.id;
+    const userRole = request.decoded.roleId;
+    const documentId = Number(request.params.id);
+    docDb.findById(documentId)
+      .then((foundDocument) => {
+        if (foundDocument) {
+          if (foundDocument.ownerId === userId ||
+        Auth.verifyAdmin(userRole)) {
+            foundDocument.update(request.body)
+              .then(() => {
+                response.status(200).json({
+                  message: 'Document Updated'
+                });
+              });
+          } else {
+            response.status(403).json({
+              message: 'Invalid Operation! No Access to update!!'
+            });
+          }
+        } else {
+          response.status(404).json({
+            message: 'Document was not found'
+          });
+        }
+      });
+  }
 }
 export default DocumentController;

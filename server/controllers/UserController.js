@@ -116,6 +116,54 @@ class UserController {
       );
     }
   }
+  /** Function to retrieve a user's documents
+   * @static
+   * @param {Object} request
+   * @param {Object} response
+   * @returns {Object} response
+   * @memberOf UserController
+   */
+  static retrieveUserDocuments(request, response) {
+    const userId = Number(request.params.id);
+    const userRoleId = request.decoded.roleId;
+    const retrieverId = request.decoded.id;
+    model.User.findById(userId, {
+      attributes: [
+        'id', 'firstName', 'lastName', 'email', 'roleId'],
+      include: {
+        model: model.Document,
+        attributes: ['id', 'access', 'title', 'content', 'ownerId', 'createdAt']
+      }
+    })
+      .then((user) => {
+        if (user) {
+          const documents = user.Documents.filter((document) => {
+            if (Auth.verifyAdmin(userRoleId)) {
+              return true;
+            } else if ((document.access === 'public' ||
+                      userRoleId === user.roleId) &&
+                      document.access !== 'private') {
+              return true;
+            } else if (document.access === 'private' &&
+                      document.ownerId === retrieverId) {
+              return true;
+            }
+            return false;
+          });
+          const userDetails = Object.assign(
+            {},
+            UserController.formatUserDetails(user),
+            { documents });
+          ResponseHandler.sendResponse(
+            response,
+            200,
+            userDetails
+          );
+        } else {
+          ResponseHandler.send404(response);
+        }
+      });
+  }
 }
 
 export default UserController;

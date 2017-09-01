@@ -1,4 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
 import types from '../actions/actionTypes';
 import initialState from './initialState';
 
@@ -17,9 +16,7 @@ export default function documentReducer(
   case types.LOAD_DOCUMENT:
     return Object.assign(
       {},
-      ...state,
-      { editMode: false },
-      { document: {} },
+      state,
       { documents: action.documents });
 
   case types.CREATE_DOCUMENT:
@@ -36,7 +33,7 @@ export default function documentReducer(
   case types.EDIT_DOCUMENT:
     return Object.assign(
       {},
-      ...state,
+      state,
       { editMode: true },
       { document: action.document });
 

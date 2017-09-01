@@ -104,12 +104,12 @@ class Editor extends Component {
    * @returns {None} none
    * @memberof Editor
    */
-  handleSubmit(e) {
+  handleSubmit(e) { // eslint-disable-line
     e.preventDefault();
 
     const { editMode } = this.props;
     if (editMode) {
-      this.handleUpdate(e);
+      return this.handleUpdate(e);
     }
 
     const { title, content, access } = this.state;

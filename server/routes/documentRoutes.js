@@ -77,6 +77,31 @@ const documentRoutes = (router) => {
       DocumentController.searchDocuments);
 
   router.route('/api/documents/:id')
+
+    /**
+     * @swagger
+     * /api/documents/{id}:
+     *   put:
+     *     description: Updates a document by Id
+     *     tags:
+     *      - Returns a updated document
+     *     produces:
+     *      - application/json
+     *     parameters:
+     *        - name: Authorization
+     *          in: header
+     *          description: an authorization header
+     *          required: true
+     *          type: string
+     *     responses:
+     *        200:
+     *          description: documents
+     *          schema:
+     *            type: array
+     *            items:
+     *              $ref: '#/definitions/Document'
+     */
+    .put(Auth.authenticateUser, DocumentController.updateDocument)
     /**
      * @swagger
      * /api/documents/{id}:
