@@ -81,4 +81,26 @@ export function logout() {
     dispatch(setCurrentUser({}));
   };
 }
-
+/**
+ * Function to dispatch action type of INIT_ALL_USERS
+ * @export
+ * @param {Object} users
+ * @returns {Object} action
+ */
+export function loadAllUsers(users) {
+  return {
+    type: types.INIT_ALL_USERS,
+    users
+  };
+}
+/**
+ * Async Function to handle loading of all users
+ * @export
+ * @param {Number} id
+ * @returns {Object} dispatch
+ */
+export function initUsers() {
+  return dispatch => axios.get('/api/users').then((res) => {
+    dispatch(loadAllUsers(res.data.users));
+  });
+}

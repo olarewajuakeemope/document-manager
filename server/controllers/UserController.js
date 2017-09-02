@@ -1,6 +1,7 @@
 import model from '../models';
 import Auth from '../middlewares/Auth';
 import ErrorHandler from '../helpers/ErrorHandler';
+import filter from '../helpers/queryFilter';
 import ResponseHandler from '../helpers/ResponseHandler';
 
 /**
@@ -114,6 +115,54 @@ class UserController {
         response,
         { message: 'Invalid Operation! Please Enter valid login details' }
       );
+    }
+  }
+  /**
+   * @static
+   * @param {Object} request
+   * @param {Object} response
+   * @returns {Object} response
+   * @memberOf UserController
+   */
+  static searchUsers(request, response) {
+    const userRoleId = request.decoded.roleId;
+    if (Auth.verifyAdmin(userRoleId)) {
+      const search = request.query.search;
+      const limit = request.query.limit;
+      const paged = request.query.page;
+      let terms = {};
+      if (search) {
+        const searchList = search.split(/\s+/);
+        terms = {
+          $or: [{ firstName: { $iLike: { $any: searchList } } },
+            { lastName: { $iLike: { $any: searchList } } },
+            { email: { $iLike: { $any: searchList } } }]
+        };
+      }
+      const queryBuilder = filter(request, undefined, terms);
+      model.User.findAndCountAll(queryBuilder)
+        .then((users) => {
+          if (users.rows.length > 0) {
+            const pageSize = limit || users.count;
+            const pageCount = Math.ceil(users.count / limit) || 1;
+            ResponseHandler.sendResponse(
+              response,
+              200,
+              {
+                users: users.rows
+                  .map(user => UserController.formatUserDetails(user)),
+                total: users.count,
+                page_size: pageSize,
+                page_count: pageCount,
+                page: paged
+              }
+            );
+          } else {
+            ResponseHandler.send404(response);
+          }
+        });
+    } else {
+      ResponseHandler.send403(response);
     }
   }
 }
