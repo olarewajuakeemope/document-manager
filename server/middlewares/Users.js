@@ -29,5 +29,27 @@ export default class Users {
       next();
     }
   }
+  /**
+   * Function to validate Get Request for users
+   * @static
+   * @param {Object} req
+   * @param {Object} res
+   * @param {Object} next
+   * @returns {Object} validation message
+   * @memberOf User
+   */
+  static validateGetRequest(req, res, next) {
+    if (req.query && Number(req.query.limit) < 1) {
+      ResponseHandler.send400(res,
+        { message: 'Invalid Limit' }
+      );
+    } else if (req.query && Number(req.query.offset) < 0) {
+      ResponseHandler.send400(res,
+        { message: 'Invalid Offset' }
+      );
+    } else {
+      next();
+    }
+  }
 }
 

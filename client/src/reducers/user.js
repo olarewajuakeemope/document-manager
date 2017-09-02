@@ -16,6 +16,10 @@ export default function userReducer(state = initialState.manageUsers, action) {
   case types.LOGIN_USER:
     return Object.assign({}, ...state, { users: action.user });
 
+  case types.INIT_ALL_USERS:
+    return Object.assign({}, ...state, {
+      allUsers: action.users });
+
   default:
     return state;
   }

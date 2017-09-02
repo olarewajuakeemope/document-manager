@@ -1,3 +1,4 @@
+import Auth from '../middlewares/Auth';
 import UserMiddleware from '../middlewares/Users';
 import UserController from '../controllers/UserController';
 
@@ -56,7 +57,33 @@ const userRoutes = (router) => {
      *         schema:
      *          type: object
      */
-    .post(UserMiddleware.validateOnCreate, UserController.createUser);
+    .post(UserMiddleware.validateOnCreate, UserController.createUser)
+    /**
+     * @swagger
+     * /api/users:
+     *   get:
+     *     description: Gets a list of all users
+     *     tags:
+     *      - Get Users List
+     *     produces:
+     *      - application/json
+     *     parameters:
+     *        - name: Authorization
+     *          in: header
+     *          description: an authorization header
+     *          required: true
+     *          type: string
+     *     responses:
+     *        200:
+     *          description: users
+     *          schema:
+     *            type: array
+     *            items:
+     *              $ref: '#/definitions/User'
+     */
+    .get(Auth.authenticateUser,
+      UserMiddleware.validateGetRequest,
+      UserController.searchUsers);
 
   /**
  * @swagger
