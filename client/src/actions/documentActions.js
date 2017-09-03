@@ -41,7 +41,10 @@ export function loadDocuments(documents) {
 export function loadAllDocument() {
   return dispatch => axios.get('/api/documents').then((res) => {
     dispatch(loadDocuments(res.data.documents));
-  });
+  })
+    .catch(() => {
+      return toastr.error('Somethings Not Right', 'Please Login Again!');
+    });
 }
 /**
  * Function to dispatch action type of DELETE_DOCUMENT
