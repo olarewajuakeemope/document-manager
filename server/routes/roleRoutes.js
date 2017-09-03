@@ -74,5 +74,57 @@ const roleRoutes = (router) => {
      */
     .get(Auth.authenticateUser, RoleMiddleware.validateOnGet,
       RoleController.retrieveRoles);
+
+  router.route('/api/roles/:id')
+  /**
+     * @swagger
+     * /api/roles/{id}:
+     *   put:
+     *     description: Updates a role
+     *     tags:
+     *      - Updates a role
+     *     produces:
+     *      - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         in:  header
+     *         description: an authorization token
+     *         required: true
+     *         type: string
+     *         schema:
+     *           $ref: '#/definitions/Role'
+     *     responses:
+     *       201:
+     *         description: roles
+     *         schema:
+     *          type: object
+     */
+    .put(Auth.authenticateUser, RoleMiddleware.validateOnPut,
+      RoleController.updateRole)
+  /**
+     * @swagger
+     * /api/roles/{id}:
+     *   put:
+     *     description: Deletes a role
+     *     tags:
+     *      - Deletes a role
+     *     produces:
+     *      - application/json
+     *     parameters:
+     *       - name: Authorization
+     *         in:  header
+     *         description: an authorization token
+     *         required: true
+     *         type: string
+     *         schema:
+     *           $ref: '#/definitions/Role'
+     *     responses:
+     *       201:
+     *         description: roles
+     *         schema:
+     *          type: object
+     */
+    .delete(Auth.authenticateUser, RoleMiddleware.validateOnDelete,
+      RoleController.removeRole);
 };
 export default roleRoutes;
