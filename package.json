@@ -83,6 +83,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-materialize": "^1.0.10",
+    "react-mf-modal": "^0.2.1",
     "react-notify-toast": "^0.3.2",
     "react-paginate": "^4.4.3",
     "react-redux": "^5.0.6",
