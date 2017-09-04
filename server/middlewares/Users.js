@@ -51,5 +51,27 @@ export default class Users {
       next();
     }
   }
+  /**
+   * Function to validate Request for users on updates
+   * @static
+   * @param {Object} req
+   * @param {Object} res
+   * @param {Object} next
+   * @returns {Object} validation message
+   * @memberOf User
+   */
+  static validateOnUpdate(req, res, next) {
+    if (req.body.id) {
+      ResponseHandler.send400(res,
+        { message: 'Invalid Operation! Cannot Change User ID' });
+    } else if (req.body.email) {
+      ResponseHandler.send400(res,
+        { message: 'Invalid Operation! Cannot Change Email' });
+    } else if (req.body.roleId) {
+      ResponseHandler.send403(res);
+    } else {
+      next();
+    }
+  }
 }
 

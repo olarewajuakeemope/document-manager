@@ -127,5 +127,32 @@ const userRoutes = (router) => {
      */
 
     .post(UserController.logIn);
+  router.route('/api/users/:id')
+  /**
+* @swagger
+* /api/users/{id}:
+*   put:
+*     description: Updates details of a single user by id
+*     tags:
+*      - Updates user details
+*     produces:
+*      - application/json
+*     parameters:
+*       - name: body
+*         description: User object
+*         in:  body
+*         required: true
+*         type: integer
+*         schema:
+*           $ref: '#/definitions/User'
+*     responses:
+*       201:
+*         description: users
+*         schema:
+*          type: array
+*/
+    .put(Auth.authenticateUser,
+      UserMiddleware.validateOnUpdate,
+      UserController.updateUserDetails);
 };
 export default userRoutes;

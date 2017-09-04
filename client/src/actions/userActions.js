@@ -104,3 +104,28 @@ export function initUsers() {
     dispatch(loadAllUsers(res.data.users));
   });
 }
+/**
+ * Function to dispatch action type of EDIT_USER
+ * @export
+ * @param {Object} user
+ * @returns {Object} action
+ */
+export function updateUser(user) {
+  return {
+    type: types.EDIT_USER,
+    user
+  };
+}
+/**
+ * Async Function to handle updates of user details
+ * @export
+ * @param {Object} user
+ * @param {Number} id
+ * @returns {Object} dispatch
+ */
+export function editUser(user, id) {
+  return dispatch => axios.put(`/api/users/${id}`, user).then((response) => {
+    dispatch(updateUser(response.data));
+    // dispatch(setCurrentUser(response.data));
+  });
+}

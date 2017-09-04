@@ -165,6 +165,39 @@ class UserController {
       ResponseHandler.send403(response);
     }
   }
+  /** Function to update user details
+   * @static
+   * @param {Object} request
+   * @param {Object} response
+   * @returns {Object} response
+   * @memberOf UserController
+   */
+  static updateUserDetails(request, response) {
+    const userRole = request.decoded.roleId;
+    const userId = request.decoded.id;
+    if (userRole === 1 || userId === Number(request.params.id)) {
+      model.User.findById(request.params.id)
+        .then((user) => {
+          if (user) {
+            user.update(request.body)
+              .then((updatedUser) => {
+                ResponseHandler.sendResponse(
+                  response,
+                  200,
+                  UserController.formatUserDetails(updatedUser)
+                );
+              })
+              .catch((error) => {
+                ErrorHandler.handleRequestError(response, error);
+              });
+          } else {
+            ResponseHandler.send404(response);
+          }
+        });
+    } else {
+      ResponseHandler.send403(response);
+    }
+  }
 }
 
 export default UserController;
