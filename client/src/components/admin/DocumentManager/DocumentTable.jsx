@@ -144,7 +144,7 @@ class DocumentTable extends Component {
       access: document.access,
       id: document.id,
       ownerId: document.ownerId,
-      date: document.date
+      date: document.createdAt
     };
     this.props.actions.editDocument(formattedDocument);
     this.context.router.push('/editor');
@@ -204,7 +204,7 @@ class DocumentTable extends Component {
    * Functions to move to a new page
    * @param {Object} e
    * @param {Object} state
-   * @returns {none} none
+   * @returns {none} none 
    * @memberOf UserTable
    */
   handleSearchChange = (e, { value }) => {
