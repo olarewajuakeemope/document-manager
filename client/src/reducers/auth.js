@@ -11,6 +11,10 @@ export default (state = initialState.manageUsers, action = {}) => {
         isLoggedIn: window.localStorage.getItem('jwtToken') !== null,
         user: action.user
       });
+
+  case types.EDIT_USER:
+    return Object.assign({}, state, { user: action.user });
+
   default: return state;
   }
 };

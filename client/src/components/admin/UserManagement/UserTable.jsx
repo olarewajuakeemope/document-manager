@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import _ from 'lodash';
 import {
   Table,
   TableBody,
@@ -10,6 +11,7 @@ import {
 } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Search } from 'semantic-ui-react';
 import SortIcon from 'material-ui/svg-icons/action/swap-vert';
 import IconButton from 'material-ui/IconButton';
 import ChevronLeft from 'material-ui/svg-icons/navigation/chevron-left';
@@ -36,10 +38,17 @@ class UserTable extends Component {
       sortHeader: null,
       offset: 0,
       limit: props.limit,
-      page: []
+      page: [],
+      processedData: []
     };
   }
-
+  /**
+   * @returns {Object} Jsx
+   * @memberOf UserSearch
+   */
+  componentWillMount() {
+    this.resetComponent();
+  }
   /**
    * Hook Method
    * @param {Object} nextProps
@@ -54,6 +63,10 @@ class UserTable extends Component {
       page: nextProps.data ?
         nextProps.data.slice(this.state.offset, nextProps.limit)
         : [],
+    });
+    const processedData = processTableData(nextProps.data);
+    this.setState({
+      processedData
     });
     this.paginate = this.paginate.bind(this);
     this.paginateBack = this.paginateBack.bind(this);
@@ -90,6 +103,11 @@ class UserTable extends Component {
       sortHeader,
       offset: 0,
       isAsc
+    });
+    const { page } = this.state;
+    const processedData = processTableData(page);
+    this.setState({
+      processedData
     });
   }
   /**
@@ -136,6 +154,11 @@ class UserTable extends Component {
       page: this.state.data.slice(offset, offset + limit),
       offset,
     });
+    const { page } = this.state;
+    const processedData = processTableData(page);
+    this.setState({
+      processedData
+    });
   }
   /**
    * Functions to move to a previous page
@@ -157,93 +180,136 @@ class UserTable extends Component {
     const { offset, limit } = this.state;
     this.paginate(offset + limit, limit);
   }
+  resetComponent = () => {
+    const { page } = this.state;
+    const processedData = processTableData(page);
 
+    this.setState({
+      isLoading: false,
+      value: '',
+      processedData
+    });
+  }
+  /**
+   * Functions to move to a new page
+   * @param {Object} e
+   * @param {Object} state
+   * @returns {none} none
+   * @memberOf UserTable
+   */
+  handleSearchChange = (e, { value }) => {
+    this.setState({ isLoading: true, value });
+
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.resetComponent();
+
+      const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
+      const isMatch = result => re.test(result.firstName);
+
+      const { page } = this.state;
+      const processedData = processTableData(page);
+      this.setState({
+        processedData: _.filter(processedData, isMatch)
+      });
+
+      this.setState({
+        isLoading: false
+      });
+    }, 500);
+  }
   /**
    * @returns {Object} Jsx
    * @memberOf DocumentTable
    */
   render() {
+    const { isLoading, value } = this.state;
     const { total, tableHeaders } = this.props;
-    const { offset, limit, page } = this.state;
-
-    const processedData = processTableData(page);
+    const { offset, limit, processedData } = this.state;
 
     return (
-      <Table className="table">
-        <TableHeader adjustForCheckbox>
-          <TableRow>
-            { tableHeaders && tableHeaders.map((header, index) => (
-              <TableHeaderColumn key={index}>
-                <div className="rowAlign">
-                  { header.alias }
-                  { header.sortable &&
+      <div>
+        <Search
+          loading={isLoading}
+          onSearchChange={this.handleSearchChange}
+          open={false}
+          value={value}
+        />
+        <Table className="table">
+          <TableHeader adjustForCheckbox>
+            <TableRow>
+              { tableHeaders && tableHeaders.map((header, index) => (
+                <TableHeaderColumn key={index}>
+                  <div className="rowAlign">
+                    { header.alias }
+                    { header.sortable &&
                     <SortIcon
                       id={header.dataAlias}
                       className="sortIcon"
                       onMouseUp={this.sortByColumn}
                     />
-                  }
-                </div>
-              </TableHeaderColumn>
-            )) }
-          </TableRow>
-        </TableHeader>
-        <TableBody
-          stripedRows
-        >
-          {processedData.map((row, index) => (
-            <TableRow key={`${index} ${row.id}`}>
-              <TableRowColumn key={`${row.id} ${row.id}`}>
-                {row.id}
-              </TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.email}`}>
-                {row.email}
-              </TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.firstName}`}>
-                {row.firstName}
-              </TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.lastName}`}>
-                {row.lastName}
-              </TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.email}`}>
-                <FlatButton
-                  key={`${index}flat${row.id}`} // eslint-disable-line
-                  label="Delete"
-                  secondary
-                  onTouchTap={
-                    () => {
-                      this.handleDelete(row.id, this.props.actions.deleteUser);
                     }
-                  }
-                />
+                  </div>
+                </TableHeaderColumn>
+              )) }
+            </TableRow>
+          </TableHeader>
+          <TableBody
+            stripedRows
+          >
+            {processedData.map((row, index) => (
+              <TableRow key={`${index} ${row.id}`}>
+                <TableRowColumn key={`${row.id} ${row.id}`}>
+                  {row.id}
+                </TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.email}`}>
+                  {row.email}
+                </TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.firstName}`}>
+                  {row.firstName}
+                </TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.lastName}`}>
+                  {row.lastName}
+                </TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.email}`}>
+                  <FlatButton
+                  key={`${index}flat${row.id}`} // eslint-disable-line
+                    label="Delete"
+                    secondary
+                    onTouchTap={
+                      () => {
+                        this.handleDelete(row.id, this.props.actions.deleteUser);
+                      }
+                    }
+                  />
+                </TableRowColumn>
+              </TableRow>
+            ))
+            }
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableRowColumn>
+                <div className="footerControls">
+                  { `${Math.min((offset + 1), total)}
+                      - ${Math.min((offset + limit), total)} of ${total}` }
+                  <IconButton
+                    disabled={offset === 0}
+                    onClick={this.paginateBack}
+                  >
+                    <ChevronLeft />
+                  </IconButton>
+                  <IconButton
+                    disabled={offset + limit >= total}
+                    onClick={this.paginateForward}
+                  >
+                    <ChevronRight />
+                  </IconButton>
+                </div>
               </TableRowColumn>
             </TableRow>
-          ))
-          }
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableRowColumn>
-              <div className="footerControls">
-                { `${Math.min((offset + 1), total)}
-                      - ${Math.min((offset + limit), total)} of ${total}` }
-                <IconButton
-                  disabled={offset === 0}
-                  onClick={this.paginateBack}
-                >
-                  <ChevronLeft />
-                </IconButton>
-                <IconButton
-                  disabled={offset + limit >= total}
-                  onClick={this.paginateForward}
-                >
-                  <ChevronRight />
-                </IconButton>
-              </div>
-            </TableRowColumn>
-          </TableRow>
-        </TableFooter>
-      </Table>
+          </TableFooter>
+        </Table>
+      </div>
     );
   }
 }
