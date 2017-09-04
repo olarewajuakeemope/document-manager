@@ -61,6 +61,14 @@ class Nav extends Component {
               id="nav-mobile"
               className="right hide-on-med-and-down"
             >
+              <li>
+                <a
+                  href="/api-docs"
+                >
+                  <i className="fa fa-file-archive-o" aria-hidden="true" />
+                  API Docs
+                </a>
+              </li>
               {isLoggedIn ?
                 <li>
                   <Link

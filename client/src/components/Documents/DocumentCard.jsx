@@ -10,7 +10,7 @@ import * as documentActions from '../../actions/documentActions';
  * @class DocumentCard
  * @extends {Component}
  */
-export class DocumentCard extends Component {
+class DocumentCard extends Component {
   /**
    * Creates an instance of DocumentCard.
    * @param {Object} props

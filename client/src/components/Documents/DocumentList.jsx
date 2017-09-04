@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DocumentCard from './DocumentCard'; // eslint-disable-line
-
+import DocumentCard from './DocumentCard';
+import DocumentSearch from '../search/DocumentSearch';
 /**
  * @class DocumentList
  * @extends {Component}
@@ -15,6 +15,7 @@ class DocumentList extends Component {
   render() {
     return (
       <div>
+        <DocumentSearch />
         {this
           .props
           .Docs
