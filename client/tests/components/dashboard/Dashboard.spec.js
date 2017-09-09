@@ -1,14 +1,22 @@
-import React from 'react';// eslint-disable-line
-import chai from 'chai';
-import chaiEnzyme from 'chai-enzyme';
-import Dashboard from
-  '../../../src/components/Dashboard';
+import React from 'react';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
+import { Dashboard } from
+   '../../../src/components/Dashboard';
 
-chai.use(chaiEnzyme());
-const expect = chai.expect;
+const props = {
+  loadAllDocument: () => {},
+  params: {}
+};
 
-describe('Dashboard', () => {
-  it('should be defined', () => {
-    expect(Dashboard).to.not.equal(undefined);
+const wrapper = shallow(<Dashboard {...props} />);
+const componentProps = wrapper.unrendered.props;
+
+describe('<Dashboard />', () => {
+  it('should have props a prop called loadAllDocument', () => {
+    expect(componentProps.loadAllDocument).to.not.be.undefined; // eslint-disable-line
+  });
+  it('should have props a prop called params', () => {
+    expect(componentProps.params).to.not.be.undefined; // eslint-disable-line
   });
 });
