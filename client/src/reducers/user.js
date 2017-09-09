@@ -1,6 +1,8 @@
 import types from '../actions/actionTypes';
 import initialState from './initialState';
 
+let newState;
+
 /**
  * User Reducer Function that handles manageUsers part of the store
  * @export
@@ -19,6 +21,13 @@ export default function userReducer(state = initialState.manageUsers, action) {
   case types.INIT_ALL_USERS:
     return Object.assign({}, ...state, {
       allUsers: action.users });
+
+  case types.DELETE_USER:
+    newState = state;
+    newState.allUsers = [...state.allUsers].filter(
+      user => user.id !== action.id
+    );
+    return newState;
 
   default:
     return state;

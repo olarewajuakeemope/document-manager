@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Nav from '../Nav';
 import Footer from '../footer';
 import Sidebar from '../Sidebar';
-import DocumentPanel from '../Documents/DocumentPanel';
+import DocumentPanel from '../Documents/DocumentPanel'; // eslint-disable-line
 import { loadAllDocument } from '../../actions/documentActions';
 
 
@@ -12,7 +12,7 @@ import { loadAllDocument } from '../../actions/documentActions';
  * @class Dashboard
  * @extends {Component}
  */
-class Dashboard extends Component {
+export class Dashboard extends Component {
   /**
    * Hook Method
    * @returns {none} updates state before component mounts

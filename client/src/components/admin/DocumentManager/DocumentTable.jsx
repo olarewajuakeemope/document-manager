@@ -24,7 +24,7 @@ import * as documentActions from '../../../actions/documentActions';
  * @class DocTable
  * @extends {Component}
  */
-class DocumentTable extends Component {
+export class DocumentTable extends Component {
   /**
    * Creates an instance of DocTable.
    * @param {Object} props

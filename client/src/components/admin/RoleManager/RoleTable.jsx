@@ -22,7 +22,7 @@ import * as roleActions from '../../../actions/roleActions';
  * @class RoleTable
  * @extends {Component}
  */
-class RoleTable extends Component {
+export class RoleTable extends Component {
   /**
    * Function that handles deletion of documents
    * @param {Number} id - userId

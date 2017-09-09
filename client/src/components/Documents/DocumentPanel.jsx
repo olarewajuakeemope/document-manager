@@ -8,7 +8,7 @@ import Main from './Main';
  * @class DocumentPanel
  * @extends {Component}
  */
-class DocumentPanel extends Component {
+export class DocumentPanel extends Component {
   /**
    * @returns {Object} Jsx
    * @memberOf DocumentPanel

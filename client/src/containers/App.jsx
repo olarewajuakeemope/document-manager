@@ -38,6 +38,4 @@ const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn
 });
 
-window.reactprops = App.props;
-
 export default connect(mapStateToProps)(App);
