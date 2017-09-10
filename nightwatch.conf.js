@@ -50,7 +50,7 @@ module.exports = {
 require('fs').stat(`${BINPATH}selenium.jar`, (err, stat) => { // got it?
   if (err || !stat || stat.size < 1) {
     require('selenium-download').ensure(BINPATH, (error) => {
-     if (error) throw new Error(error); // no point continuing so exit!
+     if (error) throw new Error(error); // no point continuing so exit!!!
      console.log('✔ Selenium & Chromedriver downloaded to:', BINPATH);
    });
   }
