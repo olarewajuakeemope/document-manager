@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DocumentCard from './DocumentCard';
+import DocumentCard from './DocumentCard'; // eslint-disable-line
 import DocumentSearch from '../search/DocumentSearch';
 /**
  * @class DocumentList

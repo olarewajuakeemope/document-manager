@@ -123,7 +123,7 @@ class RoleManager extends Component {
                 actions={
                   [
                     <Button
-                      style={{ marginLeft: `${2}em` }}
+                      style={{ marginLeft: '2em' }}
                       className="btn-save"
                       waves="light"
                       modal="close"

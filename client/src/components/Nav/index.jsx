@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { browserHistory, Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
 import FlatButton from 'material-ui/FlatButton';
 import Book from 'material-ui/svg-icons/action/book';
+import Sidebar from '../Sidebar';
 import { logout } from '../../actions/userActions';
 
 
@@ -22,8 +24,15 @@ class Nav extends Component {
    */
   constructor(props) {
     super(props);
+    this.state = { open: false };
     this.logout = this.logout.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
+
+  handleToggle = () => this.setState({ open: !this.state.open });
+
+  handleClose = () => this.setState({ open: false });
 
   /**
    * Function to handle user logouts
@@ -43,6 +52,7 @@ class Nav extends Component {
    */
   render() {
     const { isLoggedIn } = this.props.auth;
+    let showSidebar = '';
     const styles = {
       title: {
         textDecoration: 'none',
@@ -73,6 +83,7 @@ class Nav extends Component {
       </FlatButton>
     );
     if (isLoggedIn) {
+      showSidebar = <Sidebar />;
       firstName = this.props.auth.user.firstName;
 
       userInitials = (
@@ -95,33 +106,45 @@ class Nav extends Component {
           LOGOUT
         </FlatButton>);
     }
+
     return (
-      <AppBar
-        title={
-          <Link
-            className="brand-logo"
-            style={styles.title}
-            to="/"
-          >
-            acedms
-          </Link>
-        }
-        titleStyle
-        iconElementRight={
-          <div>
-            <FlatButton
+      <div>
+        <AppBar
+          showMenuIconButton={isLoggedIn}
+          title={
+            <Link
+              className="brand-logo"
               style={styles.title}
-              href="/api-docs"
-              icon={<Book />}
+              to="/"
             >
-              API Docs
-            </FlatButton>
-            {userInitials}
-            {signUpComponent}
-            {loginLogoutComponent}
-          </div>
-        }
-      />
+              acedms
+            </Link>
+          }
+          onLeftIconButtonTouchTap={this.handleToggle}
+          iconElementRight={
+            <div>
+              <FlatButton
+                style={styles.title}
+                href="/api-docs"
+                icon={<Book />}
+              >
+                API Docs
+              </FlatButton>
+              {userInitials}
+              {signUpComponent}
+              {loginLogoutComponent}
+            </div>
+          }
+        />
+        <Drawer
+          docked={false}
+          width={'20%'}
+          open={this.state.open}
+          onRequestChange={open => this.setState({ open })}
+        >
+          {showSidebar}
+        </Drawer>
+      </div>
     );
   }
 }

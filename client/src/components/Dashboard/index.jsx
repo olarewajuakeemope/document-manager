@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Nav from '../Nav';
 import Footer from '../footer';
-import Sidebar from '../Sidebar';
 import DocumentPanel from '../Documents/DocumentPanel'; // eslint-disable-line
 import { loadAllDocument } from '../../actions/documentActions';
 
@@ -28,7 +27,6 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Sidebar />
         <Nav />
         <div
           className="col s9 push-s3"
