@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Modal, Button } from 'react-materialize';
+import { Row, Modal, Button } from 'react-materialize';
 import { loadRoles, saveRole } from '../../../actions/roleActions';
 import Nav from '../../Nav';
 import RoleContainer from './RoleContainer';
@@ -113,65 +113,56 @@ class RoleManager extends Component {
     return (
       <div>
         <Nav />
-        <div>
+        <RoleContainer data={this.props.roles} />
+        <Modal
+          actions={
+            [
+              <Button
+                style={{ marginLeft: '2em' }}
+                className="btn-save"
+                waves="light"
+                modal="close"
+                flat
+              >Close
+              </Button>,
+              <Button
+                id="save-role"
+                waves="light"
+                flat
+                className="btn-save"
+                onClick={this.createRole}
+              >Save
+              </Button>
+            ]
+          }
+          trigger={
+            <a
+              className="btn-floating btn-large waves-effect waves-light red"
+            >
+              <i
+                className="material-icons"
+                data-tool-tip="add new role"
+              >add</i>
+            </a>
+          }
+        >
           <Row>
-            <Col m={1} />
-            <Col m={10}>
-
-              <RoleContainer data={this.props.roles} />
-              <Modal
-                actions={
-                  [
-                    <Button
-                      style={{ marginLeft: '2em' }}
-                      className="btn-save"
-                      waves="light"
-                      modal="close"
-                      flat
-                    >Close
-                    </Button>,
-                    <Button
-                      id="save-role"
-                      waves="light"
-                      flat
-                      className="btn-save"
-                      onClick={this.createRole}
-                    >Save
-                    </Button>
-                  ]
-                }
-                trigger={
-                  <a
-                    className="btn-floating btn-large waves-effect waves-light red"
-                  >
-                    <i
-                      className="material-icons"
-                      data-tool-tip="add new role"
-                    >add</i>
-                  </a>
-                }
-              >
-                <Row>
-                  <div className="col s8 push-s2">
-                    <div>
-                      <label htmlFor="newRole">New Role Title</label>
-                      <input
-                        id="role"
-                        type="text"
-                        icon="person_otline"
-                        placeholder="Add a role title here"
-                        onChange={this.onChange}
-                        name="title"
-                        value={this.state.role.title}
-                      />
-                    </div>
-                  </div>
-                </Row>
-              </Modal>
-            </Col>
-            <Col m={1} />
+            <div className="col s8 push-s2">
+              <div>
+                <label htmlFor="newRole">New Role Title</label>
+                <input
+                  id="role"
+                  type="text"
+                  icon="person_otline"
+                  placeholder="Add a role title here"
+                  onChange={this.onChange}
+                  name="title"
+                  value={this.state.role.title}
+                />
+              </div>
+            </div>
           </Row>
-        </div>
+        </Modal>
       </div>
     );
   }
