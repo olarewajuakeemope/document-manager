@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import DocumentCard from './DocumentCard'; // eslint-disable-line
 import DocumentSearch from '../search/DocumentSearch';
 /**
@@ -15,24 +18,35 @@ class DocumentList extends Component {
   render() {
     return (
       <div>
-        <DocumentSearch />
-        {this
-          .props
-          .Docs
-          .map((doc, index) => (
+        <div>
+          <DocumentSearch />
+          <span style={{ position: 'absolute', top: '12%', left: '80%' }}>
+            <Link to="/editor">
+              <FloatingActionButton style={{ marginRight: '20px' }}>
+                <ContentAdd />
+              </FloatingActionButton>
+            </Link>
+          </span>
+        </div>
+        <div>
+          {this
+            .props
+            .Docs
+            .map((doc, index) => (
 
-            <DocumentCard
-              title={doc.title}
-                key={doc.title + index} // eslint-disable-line
-              id={doc.id}
-              content={doc.content}
-              ownerId={doc.ownerId}
-              access={doc.access}
-              date={doc.createdAt}
-            />
+              <DocumentCard
+                title={doc.title}
+                  key={doc.title + index} // eslint-disable-line
+                id={doc.id}
+                content={doc.content}
+                ownerId={doc.ownerId}
+                access={doc.access}
+                date={doc.createdAt}
+              />
 
-          ))
-        }
+            ))
+          }
+        </div>
       </div>
     );
   }
