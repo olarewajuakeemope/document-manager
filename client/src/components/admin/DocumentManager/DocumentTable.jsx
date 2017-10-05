@@ -8,6 +8,7 @@ import {
   TableRow,
   TableRowColumn,
   TableFooter } from 'material-ui/Table';
+import { Card, CardHeader } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Search } from 'semantic-ui-react';
@@ -237,104 +238,116 @@ export class DocumentTable extends Component {
     const { offset, limit, processedData } = this.state;
 
     return (
-      <div>
-        <Search
-          loading={isLoading}
-          onSearchChange={this.handleSearchChange}
-          open={false}
-          value={value}
-        />
-        <Table className="table" displaySelectAll={false}>
-          <TableHeader displaySelectAll={false}>
-            <TableRow>
-              { tableHeaders && tableHeaders.map((header, index) => (
-                <TableHeaderColumn key={index} >
-                  <div className="rowAlign">
-                    { header.alias }
-                    { header.sortable &&
-                      <SortIcon
-                        id={header.dataAlias}
-                        className="sortIcon"
-                        onMouseUp={this.sortByColumn}
-                      />
-                    }
+      <Card
+        style={{ margin: '10px 50px' }}
+      >
+        <CardHeader
+          title="Documents"
+          titleStyle={{ fontSize: '2em', color: 'white' }}
+          style={{ backgroundColor: 'rgb(0, 188, 212)', overflow: 'auto' }}
+        >
+          <span style={{ float: 'right' }}>
+            <Search
+              loading={isLoading}
+              onSearchChange={this.handleSearchChange}
+              open={false}
+              value={value}
+              style={{ display: 'inline-block', marginRight: '50px' }}
+            />
+          </span>
+
+        </CardHeader>
+        <div>
+          <Table className="table" displaySelectAll={false}>
+            <TableHeader displaySelectAll={false}>
+              <TableRow>
+                { tableHeaders && tableHeaders.map((header, index) => (
+                  <TableHeaderColumn key={index} >
+                    <div className="rowAlign">
+                      { header.alias }
+                      { header.sortable &&
+                        <SortIcon
+                          id={header.dataAlias}
+                          className="sortIcon"
+                          onMouseUp={this.sortByColumn}
+                        />
+                      }
+                    </div>
+                  </TableHeaderColumn>
+                )) }
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {processedData.map((row, index) => (
+                <TableRow key={`${index} ${row.id}`}>
+                  <TableRowColumn key={`${row.id} ${row.id}`}>
+                    {row.id}
+                  </TableRowColumn>
+                  <TableRowColumn key={`${row.id} ${row.title}`}>
+                    {row.title}
+                  </TableRowColumn>
+                  <TableRowColumn key={`${row.id} ${row.access}`}>
+                    {row.access}
+                  </TableRowColumn>
+                  <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
+                    {row.ownerRoleId === 1 ? 'Admin' : 'Regular'}
+                  </TableRowColumn>
+                  <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
+                    <FlatButton
+                      key={`${index}flat${row.id}`}
+                      label="Delete"
+                      secondary
+                      onTouchTap={
+                        () => {
+                          this.handleDelete(
+                            row.id,
+                            this.props.actions.deleteDocumentById
+                          );
+                        }
+                      }
+                    />
+                  </TableRowColumn>
+                  <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
+                    <FlatButton
+                      key={`${index}flat${row.id}`}  // eslint-disable-line
+                      label="Edit"
+                      secondary
+                      onTouchTap={
+                        () => {
+                          this.handleEdit(row);
+                        }
+                      }
+                    />
+                  </TableRowColumn>
+                </TableRow>
+              ))
+              }
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableRowColumn>
+                  <div className="footerControls">
+                    { `${Math.min((offset + 1), total)}
+                    - ${Math.min((offset + limit), total)} of ${total}` }
+                    <IconButton
+                      disabled={offset === 0}
+                      onClick={this.paginateBack}
+                    >
+                      <ChevronLeft />
+                    </IconButton>
+                    <IconButton
+                      disabled={offset + limit >= total}
+                      onClick={this.paginateForward}
+                    >
+                      <ChevronRight />
+                    </IconButton>
                   </div>
-                </TableHeaderColumn>
-              )) }
-            </TableRow>
-          </TableHeader>
-          <TableBody
-            stripedRows
-          >
-            {processedData.map((row, index) => (
-              <TableRow key={`${index} ${row.id}`}>
-                <TableRowColumn key={`${row.id} ${row.id}`}>
-                  {row.id}
-                </TableRowColumn>
-                <TableRowColumn key={`${row.id} ${row.title}`}>
-                  {row.title}
-                </TableRowColumn>
-                <TableRowColumn key={`${row.id} ${row.access}`}>
-                  {row.access}
-                </TableRowColumn>
-                <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
-                  {row.ownerRoleId === 1 ? 'Admin' : 'Regular'}
-                </TableRowColumn>
-                <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
-                  <FlatButton
-                    key={`${index}flat${row.id}`}
-                    label="Delete"
-                    secondary
-                    onTouchTap={
-                      () => {
-                        this.handleDelete(
-                          row.id,
-                          this.props.actions.deleteDocumentById
-                        );
-                      }
-                    }
-                  />
-                </TableRowColumn>
-                <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
-                  <FlatButton
-                    key={`${index}flat${row.id}`}  // eslint-disable-line
-                    label="Edit"
-                    secondary
-                    onTouchTap={
-                      () => {
-                        this.handleEdit(row);
-                      }
-                    }
-                  />
                 </TableRowColumn>
               </TableRow>
-            ))
-            }
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableRowColumn>
-                <div className="footerControls">
-                  { `${Math.min((offset + 1), total)}
-                  - ${Math.min((offset + limit), total)} of ${total}` }
-                  <IconButton
-                    disabled={offset === 0}
-                    onClick={this.paginateBack}
-                  >
-                    <ChevronLeft />
-                  </IconButton>
-                  <IconButton
-                    disabled={offset + limit >= total}
-                    onClick={this.paginateForward}
-                  >
-                    <ChevronRight />
-                  </IconButton>
-                </div>
-              </TableRowColumn>
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </div>
+            </TableFooter>
+          </Table>
+        </div>
+      </Card>
     );
   }
 }

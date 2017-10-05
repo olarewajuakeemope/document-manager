@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Row } from 'react-materialize';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -19,11 +18,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Row>
-          <div className="content">
-            {this.props.children}
-          </div>
-        </Row>
+        <div className="content">
+          {this.props.children}
+        </div>
       </div>
     );
   }

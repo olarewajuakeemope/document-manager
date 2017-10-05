@@ -177,12 +177,12 @@ class Profile extends React.Component {
                         <th>First Name</th>
                         <th>{firstName.toUpperCase()}</th>
                         {viewMode ? '' :
-                        <th>
+                          <th>
                             <Modal
-                            actions={
+                              actions={
                                 [
                                   <Button
-                                    style={{ marginLeft: `${2}em` }}
+                                    style={{ marginLeft: '2em' }}
                                     className="btn-save"
                                     waves="light"
                                     modal="close"
@@ -200,37 +200,36 @@ class Profile extends React.Component {
                                   </Button>
                                 ]
                               }
-                            trigger={
+                              trigger={
                                 <button
-                                className="fa fa-pencil card-actions"
-                                data-tooltip="Edit First Name"
-                              />}
-                          >
-                            <Row>
+                                  className="fa fa-pencil card-actions"
+                                  data-tooltip="Edit First Name"
+                                />
+                              }
+                            >
+                              <Row>
                                 <div className="col s8 push-s2">
-                                <h4
-                                    className="user-header"
-                                  >UPDATE First Name</h4>
-                                <div>
-                                    <label
-                                    htmlFor="current"
-                                  >Current First Name</label>
+                                  <h4 className="user-header">
+                                    UPDATE First Name
+                                  </h4>
+                                  <div>
+                                    <label htmlFor="current">Current First Name</label>
                                     <h4 id="current">{firstName.toUpperCase()}</h4>
                                   </div>
-                                <div>
+                                  <div>
                                     <label htmlFor="new">New First Name</label>
                                     <input
-                                    id="firstName"
-                                    type="text"
-                                    icon="person_otline"
-                                    onChange={this.onChange}
-                                    name="firstName"
-                                    value={this.state.user.firstName}
-                                  />
+                                      id="firstName"
+                                      type="text"
+                                      icon="person_otline"
+                                      onChange={this.onChange}
+                                      name="firstName"
+                                      value={this.state.user.firstName}
+                                    />
                                   </div>
-                              </div>
+                                </div>
                               </Row>
-                          </Modal>
+                            </Modal>
                           </th>
                         }
                       </tr>
@@ -239,13 +238,13 @@ class Profile extends React.Component {
                         <th>Last Name</th>
                         <th>{lastName.toUpperCase()}</th>
                         {viewMode ? '' :
-                        <th>
+                          <th>
                             <Modal
-                            body=""
-                            actions={
+                              body=""
+                              actions={
                                 [
                                   <Button
-                                    style={{ marginLeft: `${2}em` }}
+                                    style={{ marginLeft: '2em' }}
                                     className="btn-save"
                                     waves="light"
                                     modal="close"
@@ -262,50 +261,49 @@ class Profile extends React.Component {
                                   </Button>
                                 ]
                               }
-                            trigger={
+                              trigger={
                                 <button
-                                className="fa fa-pencil card-actions"
-                                data-tooltip="Edit Last Name"
-                              />}
-                          >
-                            <Row>
+                                  className="fa fa-pencil card-actions"
+                                  data-tooltip="Edit Last Name"
+                                />
+                              }
+                            >
+                              <Row>
                                 <div className="col s8 push-s2">
-                                <h4 className="user-header">UPDATE Last Name</h4>
-                                <div>
-                                    <label
-                                    htmlFor="current"
-                                  >Current First Name</label>
+                                  <h4 className="user-header">UPDATE Last Name</h4>
+                                  <div>
+                                    <label htmlFor="current">Current First Name</label>
                                     <h4 id="current">{lastName.toUpperCase()}</h4>
                                   </div>
-                                <div>
+                                  <div>
                                     <label htmlFor="new">New Last Name</label>
                                     <input
-                                    id="lastName"
-                                    type="text"
-                                    icon="person_otline"
-                                    onChange={this.onChange}
-                                    name="lastName"
-                                    value={this.state.user.lastName}
-                                  />
+                                      id="lastName"
+                                      type="text"
+                                      icon="person_otline"
+                                      onChange={this.onChange}
+                                      name="lastName"
+                                      value={this.state.user.lastName}
+                                    />
                                   </div>
-                              </div>
+                                </div>
                               </Row>
-                          </Modal>
+                            </Modal>
                           </th>
                         }
                       </tr>
                       <tr className="clear" />
                       {viewMode ? '' :
-                      <tr>
+                        <tr>
                           <th>Password</th>
                           <th>*******</th>
                           <th>
-                          <Modal
+                            <Modal
                               body=""
                               actions={
                                 [
                                   <Button
-                                    style={{ marginLeft: `${2}em` }}
+                                    style={{ marginLeft: '2em' }}
                                     className="btn-save"
                                     waves="light"
                                     modal="close"
@@ -323,23 +321,23 @@ class Profile extends React.Component {
                                 ]
                               }
                               trigger={
-                              <button
+                                <button
                                   className="fa fa-pencil card-actions"
                                   data-tooltip="Edit Password"
                                 />}
                             >
                               <Row>
-                              <div className="col s8 push-s2">
+                                <div className="col s8 push-s2">
                                   <h4 className="user-header">UPDATE PASSWORD</h4>
                                   <div>
-                                  <label
+                                    <label
                                       htmlFor="current"
                                     >Current Password</label>
-                                  <input id="current" type="password" />
-                                </div>
+                                    <input id="current" type="password" />
+                                  </div>
                                   <div>
-                                  <label htmlFor="new">New Password</label>
-                                  <input
+                                    <label htmlFor="new">New Password</label>
+                                    <input
                                       id="password"
                                       type="password"
                                       onChange={this.onChange}
@@ -347,12 +345,10 @@ class Profile extends React.Component {
                                       value={this.state.user.password}
                                       icon="lock"
                                     />
-                                </div>
+                                  </div>
                                   <div>
-                                  <label
-                                      htmlFor="comfirm"
-                                    >Comfirm New Password</label>
-                                  <input
+                                    <label htmlFor="comfirm">Comfirm New Password</label>
+                                    <input
                                       id="comfirm-password"
                                       type="password"
                                       onChange={this.onChange}
@@ -360,11 +356,11 @@ class Profile extends React.Component {
                                       value={this.state.user.confirmPassword}
                                       icon="lock"
                                     />
+                                  </div>
                                 </div>
-                                </div>
-                            </Row>
+                              </Row>
                             </Modal>
-                        </th>
+                          </th>
                         </tr>
                       }
                       <tr className="clear" />

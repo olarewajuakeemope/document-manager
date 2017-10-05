@@ -54,24 +54,31 @@ class MenuList extends Component {
    */
   render() {
     const { isAdmin, role, user } = this.props;
+    const styles = {
+      title: {
+        textDecoration: 'none',
+        color: 'initial'
+      },
+    };
     return (
       <div className="ace-menu">
         <Divider />
         {isAdmin ?
           <List className="side">
-            <ListItem leftIcon={<ContentInbox />} >{role}</ListItem>
-            <ListItem leftIcon={<ContentInbox />}>{user.email}</ListItem>
+            <ListItem disabled leftIcon={<ContentInbox />} >{role}</ListItem>
+            <ListItem disabled leftIcon={<ContentInbox />}>{user.email}</ListItem>
           </List>
           :
           <List>
             <ListItem
+              disabled
               className="side"
               leftIcon={<ActionGrade />}
             >
               {role}
             </ListItem>
-            <ListItem leftIcon={<ActionGrade />}>{user.email}</ListItem>
-            <ListItem leftIcon={<ActionGrade />}>
+            <ListItem disabled leftIcon={<ActionGrade />}>{user.email}</ListItem>
+            <ListItem disabled leftIcon={<ActionGrade />}>
               {user.firstName} {user.lastName}
             </ListItem>
           </List>
@@ -80,28 +87,63 @@ class MenuList extends Component {
         {isAdmin ?
           <List className="side">
             <ListItem leftIcon={<ContentInbox />}>
-              <Link to="/documents">Manage Documents </Link>
+              <Link
+                style={styles.title}
+                to="/documents"
+              >
+                  Manage Documents
+              </Link>
             </ListItem>
             <ListItem leftIcon={<ActionGrade />}>
-              <Link to="/users">Manage Users </Link>
+              <Link
+                style={styles.title}
+                to="/users"
+              >
+               Manage Users
+              </Link>
             </ListItem>
             <ListItem leftIcon={<ContentSend />}>
-              <Link to="/roles">Manage Roles </Link>
+              <Link
+                style={styles.title}
+                to="/roles"
+              >
+                Manage Roles
+              </Link>
             </ListItem>
             <ListItem leftIcon={<ContentSend />}>
-              <Link to="/document/privateDocs">My Docs</Link>
+              <Link
+                style={styles.title}
+                to="/document/privateDocs"
+              >
+                My Docs
+              </Link>
             </ListItem>
             <ListItem leftIcon={<ContentSend />}>
-              <Link to="/document/publicDocs">Public Docs</Link>
+              <Link
+                style={styles.title}
+                to="/document/publicDocs"
+              >
+                Public Docs
+              </Link>
             </ListItem>
             <ListItem leftIcon={<ContentSend />}>
-              <Link to="/document/roleDocs">Role Docs</Link>
+              <Link
+                style={styles.title}
+                to="/document/roleDocs"
+              >
+                Role Docs
+              </Link>
             </ListItem>
           </List>
           :
           <List className="special-icon">
             <ListItem leftIcon={<ContentInbox />}>
-              <Link to="/profile">Profile </Link>
+              <Link
+                style={styles.title}
+                to="/profile"
+              >
+                Profile
+              </Link>
             </ListItem>
             <ListItem
               primaryText="Documents"
@@ -111,19 +153,34 @@ class MenuList extends Component {
                   key={1}
                   leftIcon={<ActionGrade />}
                 >
-                  <Link to="/document/privateDocs">My Docs</Link>
+                  <Link
+                    style={styles.title}
+                    to="/document/privateDocs"
+                  >
+                    My Docs
+                  </Link>
                 </ListItem>,
                 <ListItem
                   key={2}
                   leftIcon={<ContentSend />}
                 >
-                  <Link to="/document/publicDocs">Public Docs</Link>
+                  <Link
+                    style={styles.title}
+                    to="/document/publicDocs"
+                  >
+                    Public Docs
+                  </Link>
                 </ListItem>,
                 <ListItem
                   key={3}
                   leftIcon={<ContentSend />}
                 >
-                  <Link to="/document/roleDocs">Role Docs</Link>
+                  <Link
+                    style={styles.title}
+                    to="/document/roleDocs"
+                  >
+                    Role Docs
+                  </Link>
                 </ListItem>
               ]}
             /></List>
