@@ -65,19 +65,20 @@ class MenuList extends Component {
         <Divider />
         {isAdmin ?
           <List className="side">
-            <ListItem leftIcon={<ContentInbox />} >{role}</ListItem>
-            <ListItem leftIcon={<ContentInbox />}>{user.email}</ListItem>
+            <ListItem disabled leftIcon={<ContentInbox />} >{role}</ListItem>
+            <ListItem disabled leftIcon={<ContentInbox />}>{user.email}</ListItem>
           </List>
           :
           <List>
             <ListItem
+              disabled
               className="side"
               leftIcon={<ActionGrade />}
             >
               {role}
             </ListItem>
-            <ListItem leftIcon={<ActionGrade />}>{user.email}</ListItem>
-            <ListItem leftIcon={<ActionGrade />}>
+            <ListItem disabled leftIcon={<ActionGrade />}>{user.email}</ListItem>
+            <ListItem disabled leftIcon={<ActionGrade />}>
               {user.firstName} {user.lastName}
             </ListItem>
           </List>

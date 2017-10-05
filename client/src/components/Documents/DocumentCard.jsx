@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+
 import { bindActionCreators } from 'redux';
 import * as documentActions from '../../actions/documentActions';
 
@@ -81,48 +85,41 @@ export class DocumentCard extends Component {
     return (
       <div className="col s3">
         <div className="row">
-          <div className="card ace-card">
-            <div className="card-content">
-              <span className="card-title doc-title">{this.props.title}</span>
-              <p>{this.props.content.replace(/<p*[^>]*>/g, '').slice(0, 15)}...</p>
-            </div>
-            <div className="card-action row">
-              <div className="col s4">
-                <span   // eslint-disable-line
-                  id="edit-doc"
-                  className="fa fa-pencil-square-o card-actions tooltipped ace-icon" // eslint-disable-line
-                  data-position="bottom"
-                  data-tooltip="Edit document"
-                  onClick={this.editDocument}
-                />
-              </div>
-              <div className="col s4">
-                <span   // eslint-disable-line
-                  className=""
-                  data-position="bottom"
-                  data-tooltip="View document"
-                  onClick={this.editDocument}
-                />
-              </div>
-              <div className="col s4">
-                <span   // eslint-disable-line
-                  className="fa fa-trash card-actions tooltipped ace-icon"
-                  data-position="bottom"
-                  id="delete-doc"
-                  data-delay="20"
-                  data-tooltip="Delete document"
-                  onClick={
-                    () => {
-                      this.deleteDocument(
-                        this.props.id,
-                        this.props.actions.deleteDocumentById
-                      );
-                    }
+          <Card>
+            <CardHeader
+              title={this.props.title}
+              subtitle={this.props.access}
+              style={{ backgroundColor: '#EEEEEE' }}
+            />
+            <CardText>
+              <p>{this.props.content.replace(/<p*[^>]*>/g, '').slice(0, 30)}...</p>
+            </CardText>
+            <CardActions>
+              <IconButton
+                iconClassName="material-icons"
+                tooltip="Edit"
+                iconStyle={{ color: '#CCCCCC' }}
+                onClick={this.editDocument}
+              >
+      edit
+              </IconButton>
+              <IconButton
+                iconClassName="material-icons"
+                tooltip="Delete"
+                iconStyle={{ color: '#CCCCCC' }}
+                onClick={
+                  () => {
+                    this.deleteDocument(
+                      this.props.id,
+                      this.props.actions.deleteDocumentById
+                    );
                   }
-                />
-              </div>
-            </div>
-          </div>
+                }
+              >
+      delete
+              </IconButton>
+            </CardActions>
+          </Card>
         </div>
       </div>
     );
