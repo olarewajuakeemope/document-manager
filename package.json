@@ -4,7 +4,6 @@
   "description": "document management system using react and redux",
   "main": "server.js",
   "scripts": {
-    "heroku-postbuild": "npm run migrations && npm run seeds",
     "undo:migrations": "sequelize db:migrate:undo:all",
     "migrations": "sequelize db:migrate",
     "seeds": "sequelize db:seed:all",
