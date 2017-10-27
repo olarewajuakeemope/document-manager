@@ -123,13 +123,13 @@ class Nav extends Component {
           onLeftIconButtonTouchTap={this.handleToggle}
           iconElementRight={
             <div>
-              <FlatButton
+              {/* <FlatButton
                 style={styles.title}
                 href="/api-docs"
                 icon={<Book />}
               >
                 API Docs
-              </FlatButton>
+              </FlatButton> */}
               {userInitials}
               {signUpComponent}
               {loginLogoutComponent}
