@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DocumentTable from './DocumentTable';
+import DocumentTable from './DocumentTable'; //eslint-disable-line
 
 /**
  * @class Container

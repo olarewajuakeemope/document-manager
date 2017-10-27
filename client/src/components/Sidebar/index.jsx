@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Avatar from 'material-ui/Avatar';
+import Divider from 'material-ui/Divider';
 import ListItem from 'material-ui/List/ListItem';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import PropTypes from 'prop-types';
 import MenuList from './MenuList';
 
@@ -35,19 +38,13 @@ class Sidebar extends Component {
       role = 'Admin-user';
     }
     return (
-      <div className="col s3 side-nav fixed" id="slide-out">
-        <h3 className="brand-logo">acedms</h3>
-        <Link
-          id="create-doc"
-          className="btn-floating btn-large waves-effect waves-light #26a69a"
-          data-position="left"
-          data-delay="50"
-          data-tooltip="new document"
-          to="/editor"
-        >
-          <i className="material-icons">add</i>
+      <div>
+        <Link to="/editor">
+          <FloatingActionButton style={{ marginRight: '20px' }}>
+            <ContentAdd />
+          </FloatingActionButton>
         </Link>
-        <div className="profile-box">
+        <div>
           {isAdmin
             ? <ListItem
               disabled
@@ -60,7 +57,7 @@ class Sidebar extends Component {
 
           }
         </div>
-        <div className="divider" />
+        <Divider />
         <MenuList role={role} isAdmin={isAdmin} user={user} />
       </div>
     );

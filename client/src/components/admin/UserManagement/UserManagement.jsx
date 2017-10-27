@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { initUsers } from '../../../actions/userActions';
 import Nav from '../../Nav'; //eslint-disable-line
@@ -47,15 +46,7 @@ class UserManagement extends Component {
     return (
       <div>
         <Nav />
-        <div>
-          <Row>
-            <Col m={1} />
-            <Col m={10}>
-              <UserContainer data={this.props.users} />
-            </Col>
-            <Col m={1} />
-          </Row>
-        </div>
+        <UserContainer data={this.props.users} />
       </div>
     );
   }

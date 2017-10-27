@@ -78,6 +78,7 @@ class DocumentSearch extends Component {
         onSearchChange={this.handleSearchChange}
         results={results}
         value={value}
+        style={{ margin: 20 }}
       />
     );
   }

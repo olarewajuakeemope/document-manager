@@ -7,6 +7,7 @@ import {
   TableRow,
   TableRowColumn,
   TableFooter } from 'material-ui/Table';
+import { Card, CardHeader } from 'material-ui/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SortIcon from 'material-ui/svg-icons/action/swap-vert';
@@ -177,91 +178,98 @@ export class RoleTable extends Component {
     const processedData = processTableData(page);
 
     return (
-      <Table className="table" displaySelectAll={false}>
-        <TableHeader adjustForCheckbox>
-          <TableRow>
-            { tableHeaders && tableHeaders.map((header, index) => (
-              <TableHeaderColumn key={index}>
-                <div className="rowAlign">
-                  { header.alias }
-                  { header.sortable &&
-                    <SortIcon
-                      id={header.dataAlias}
-                      className="sortIcon"
-                      onMouseUp={this.sortByColumn}
-                    />
-                  }
-                </div>
-              </TableHeaderColumn>
-            )) }
-          </TableRow>
-        </TableHeader>
-        <TableBody
-          stripedRows
-        >
-          {processedData.map((row, index) => (
-            <TableRow key={`${index} ${row.id}`}>
-              <TableRowColumn key={`${row.id} ${row.id}`}>
-                {row.id}
-              </TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.title}`}>
-                {row.title}
-              </TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.access}`}>
-                {row.access}
-              </TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
-                <FlatButton
-                  key={`${index}flat${row.id}`}
-                  label="Delete"
-                  secondary
-                  onTouchTap={
-                    () => {
-                      RoleTable.handleDelete(
-                        row.id,
-                        this.props.actions.deleteRole
-                      );
+      <Card
+        style={{ margin: '10px 50px' }}
+      >
+        <CardHeader
+          title="Roles"
+          titleStyle={{ fontSize: '2em', color: 'white' }}
+          style={{ backgroundColor: 'rgb(0, 188, 212)', overflow: 'auto' }}
+        />
+        <Table className="table" displaySelectAll={false}>
+          <TableHeader adjustForCheckbox>
+            <TableRow>
+              { tableHeaders && tableHeaders.map((header, index) => (
+                <TableHeaderColumn key={index}>
+                  <div className="rowAlign">
+                    { header.alias }
+                    { header.sortable &&
+                      <SortIcon
+                        id={header.dataAlias}
+                        className="sortIcon"
+                        onMouseUp={this.sortByColumn}
+                      />
                     }
-                  }
-                /></TableRowColumn>
-              <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
-                <FlatButton
-                  key={`${index}flat${row.id}`}
-                  label="Edit"
-                  secondary
-                  onTouchTap={
-                    () => {
-                      this.handleEdit(row.id);
-                    }
-                  }
-                /></TableRowColumn>
+                  </div>
+                </TableHeaderColumn>
+              )) }
             </TableRow>
-          ))
-          }
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableRowColumn>
-              <div className="footerControls">
-                { `${Math.min((offset + 1), total)}
-                 - ${Math.min((offset + limit), total)} of ${total}` }
-                <IconButton
-                  disabled={offset === 0}
-                  onClick={this.paginateBack}
-                >
-                  <ChevronLeft />
-                </IconButton>
-                <IconButton
-                  disabled={offset + limit >= total}
-                  onClick={this.paginateForward}
-                >
-                  <ChevronRight />
-                </IconButton>
-              </div>
-            </TableRowColumn>
-          </TableRow>
-        </TableFooter>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {processedData.map((row, index) => (
+              <TableRow key={`${index} ${row.id}`}>
+                <TableRowColumn key={`${row.id} ${row.id}`}>
+                  {row.id}
+                </TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.title}`}>
+                  {row.title}
+                </TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.access}`}>
+                  {row.access}
+                </TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
+                  <FlatButton
+                    key={`${index}flat${row.id}`}
+                    label="Delete"
+                    secondary
+                    onTouchTap={
+                      () => {
+                        RoleTable.handleDelete(
+                          row.id,
+                          this.props.actions.deleteRole
+                        );
+                      }
+                    }
+                  /></TableRowColumn>
+                <TableRowColumn key={`${row.id} ${row.ownerRoleId}`}>
+                  <FlatButton
+                    key={`${index}flat${row.id}`}
+                    label="Edit"
+                    secondary
+                    onTouchTap={
+                      () => {
+                        this.handleEdit(row.id);
+                      }
+                    }
+                  /></TableRowColumn>
+              </TableRow>
+            ))
+            }
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableRowColumn>
+                <div className="footerControls">
+                  { `${Math.min((offset + 1), total)}
+                  - ${Math.min((offset + limit), total)} of ${total}` }
+                  <IconButton
+                    disabled={offset === 0}
+                    onClick={this.paginateBack}
+                  >
+                    <ChevronLeft />
+                  </IconButton>
+                  <IconButton
+                    disabled={offset + limit >= total}
+                    onClick={this.paginateForward}
+                  >
+                    <ChevronRight />
+                  </IconButton>
+                </div>
+              </TableRowColumn>
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </Card>
     );
   }
 }
