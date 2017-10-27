@@ -145,11 +145,11 @@ class Profile extends React.Component {
         <Nav auth={this.props.auth} />
         <div>
           <Row>
-            <Col m={2}>
+            {/* <Col m={2}>
               <div className="card profile-card">
                 <i className="fa fa-user profile" />
               </div>
-            </Col>
+            </Col> */}
             <Col m={10}>
               <Col className="s7 push-s3" >
                 <div className="card">
