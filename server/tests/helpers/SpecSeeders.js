@@ -3,11 +3,10 @@ import SpecFakers from './SpecFakers';
 
 export default class SpecSeeders {
   static init() {
-
     return db.sequelize.sync({ force: true })
-        .then(() => SpecSeeders.populateRoleTable())
-        .then(() => SpecSeeders.populateUserTable())
-        .then(() => SpecSeeders.populateDocumentTable());
+      .then(() => SpecSeeders.populateRoleTable())
+      .then(() => SpecSeeders.populateUserTable())
+      .then(() => SpecSeeders.populateDocumentTable());
   }
   static populateUserTable() {
     const users = [
