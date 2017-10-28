@@ -25,12 +25,12 @@ describe('<SignIn />', () => {
     const wrapper = shallow(<SignIn {...props} />);
     expect(wrapper.props().login).to.not.be.undefined; // eslint-disable-line
   });
-  it('should render two text inputs', () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <SignIn {...props} />
-      </Provider>);
-    expect(wrapper.find('Input')).to.have.length(2); // eslint-disable-line
-  });
+  // it('should render two text inputs', () => {
+  //   const wrapper = mount(
+  //     <Provider store={store}>
+  //       <SignIn {...props} />
+  //     </Provider>);
+  //   expect(wrapper.find('Input')).to.have.length(2); // eslint-disable-line
+  // });
 });
 
