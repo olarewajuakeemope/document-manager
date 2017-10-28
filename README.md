@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/olarewajuakeemope/document-manager.svg?branch=master)](https://travis-ci.org/olarewajuakeemope/document-manager)
-[![Code Climate](https://codeclimate.com/github/olarewajuakeemope/document-manager/badges/gpa.svg)](https://codeclimate.com/github/olarewajuakeemope/document-manager)
+ <a href="https://codeclimate.com/github/codeclimate/codeclimate"><img src="https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg" /></a> 
 # Document Manager
 Document Manager is a full stack document management system, complete with roles and privileges . Each document defines access rights; the document defines which roles can access it. Also, each document specifies the date it was published.
 Users are categorized by roles. Users with access to specific documents can edit and update their documents but will not be granted access to read or write to a document with unathourized access role, only a view access.
