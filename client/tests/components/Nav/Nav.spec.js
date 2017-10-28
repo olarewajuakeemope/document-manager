@@ -67,6 +67,6 @@ describe('Navbar', () => {
           <Navbar {...newProps} />
         </Provider>
       </MuiThemeProvider>);
-    expect(wrapper.find('header')).to.have.length(1); // eslint-disable-line
+    expect(wrapper.find('button')).to.have.length(4); // eslint-disable-line
   });
 });
