@@ -69,9 +69,10 @@ class Form extends React.Component {
     return (
       <div
         className="container login-form"
+        style={{ paddingTop: '5em' }}
       >
         <form>
-          <h3> SIGN UP</h3>
+          <h3 style={{ textAlign: 'center' }}> SIGN UP</h3>
           <Input
             id="firstName"
             type="text"
@@ -112,12 +113,14 @@ class Form extends React.Component {
             label="Password"
             s={12}
           />
-          <Button
-            type="submit"
-            value="Sign In"
-            onClick={this.onSubmit}
-          >REGISTER
-          </Button>
+          <p style={{ textAlign: 'center' }}>
+            <Button
+              type="submit"
+              value="Sign In"
+              onClick={this.onSubmit}
+            >REGISTER
+            </Button>
+          </p>
           <div className="input-field col s12" >
             <p className="margin center medium-small sign-up">
                 Already have an account?
