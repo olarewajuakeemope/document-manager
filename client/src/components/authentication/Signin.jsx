@@ -58,9 +58,9 @@ export class Signin extends Component {
             <Row>
               <Col m={3} />
               <Col m={6}>
-                <div className="container">
+                <div className="container" style={{ paddingTop: '5em' }}>
                   <form>
-                    <h3>SIGN IN</h3>
+                    <h3 style={{ textAlign: 'center' }}>SIGN IN</h3>
                     <Input
                       id="email-login"
                       name="email"
@@ -80,7 +80,7 @@ export class Signin extends Component {
                       onChange={this.onChange}
                       value={this.state.password}
                     />
-                    <p>
+                    <p style={{ textAlign: 'center' }}>
                       <Button
                         type="submit"
                         value="Sign In"

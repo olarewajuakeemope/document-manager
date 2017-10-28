@@ -16,6 +16,16 @@ class DocumentList extends Component {
    * @memberOf DocumentList
    */
   render() {
+    if (this.props.Docs.length === 0) {
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <h1>You Currently Do Not Have Private Documents</h1>
+          <p>
+            <Link to="/editor">Create Document</Link>
+          </p>
+        </div>
+      )
+    }
     return (
       <div>
         <div>
